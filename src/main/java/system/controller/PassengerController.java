@@ -8,15 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import system.dao.PassengerDao;
 import system.model.Passenger;
 import system.service.PassengerService;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/userssystem")
 public class PassengerController {
 
+    @Autowired
     private PassengerService passengerService;
 
     public PassengerService getPassengerService() {
@@ -28,16 +31,16 @@ public class PassengerController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-//    @ResponseBody
-//    public String getAllPassengers(){
-//        return this.passengerService.getAllPassengers().toString();
-//    }
-    public String listBooks(Model model){
-        model.addAttribute("passenger", new Passenger());
-        model.addAttribute("listBooks", this.passengerService.getAllPassengers());
-
-        return "passengers";
+    @ResponseBody
+    public String getAllPassengers(){
+        return this.passengerService.getAllPassengers().toString();
     }
+//    public String listBooks(Model model){
+//        model.addAttribute("passenger", new Passenger());
+//        model.addAttribute("listBooks", this.passengerService.getAllPassengers());
+//
+//        return "passengers";
+//    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(){
@@ -92,20 +95,20 @@ public class PassengerController {
     public boolean isPassengerDataValid(Passenger passenger) {
         String loginRegex = ".*[^a-zA-Z0-9].*";
         String nameRegex = "^[^A-Z].*|.*[^a-zA-Z].*";
-        if (passenger.getLogin().equals("") || passenger.getFirstName().equals("") || passenger.getSecondName().equals("")
-                || passenger.getYear() == 0 || passenger.getMonth() == 0 ||
-                passenger.getDay() == 0 || passenger.getPassword().equals("")) {
-            return false;
-        }
-        if (Pattern.matches(loginRegex, passenger.getLogin())) { return false; }
-        if (Pattern.matches(loginRegex, passenger.getPassword())) { return false; }
-        if (Pattern.matches(nameRegex, passenger.getFirstName())) { return false; }
-        if (Pattern.matches(nameRegex, passenger.getSecondName())) { return false; }
-        if (passenger.getYear() > 2000 || passenger.getYear() < 1900) { return false; }
-        if (passenger.getMonth() < 1 || passenger.getMonth() > 12) { return false; }
-        if (passenger.getDay() < 1 || passenger.getDay() > 31) { return false; }
-        if (passenger.getMonth() == 3 && passenger.getDay() > 29) {return false; }
-        if (passenger.getMonth() == 3 && passenger.getDay() == 29 && passenger.getYear() % 4 != 0) {return false; }
+//        if (passenger.getLogin().equals("") || passenger.getFirstName().equals("") || passenger.getSecondName().equals("")
+//                || passenger.getYear() == 0 || passenger.getMonth() == 0 ||
+//                passenger.getDay() == 0 || passenger.getPassword().equals("")) {
+//            return false;
+//        }
+//        if (Pattern.matches(loginRegex, passenger.getLogin())) { return false; }
+//        if (Pattern.matches(loginRegex, passenger.getPassword())) { return false; }
+//        if (Pattern.matches(nameRegex, passenger.getFirstName())) { return false; }
+//        if (Pattern.matches(nameRegex, passenger.getSecondName())) { return false; }
+//        if (passenger.getYear() > 2000 || passenger.getYear() < 1900) { return false; }
+//        if (passenger.getMonth() < 1 || passenger.getMonth() > 12) { return false; }
+//        if (passenger.getDay() < 1 || passenger.getDay() > 31) { return false; }
+//        if (passenger.getMonth() == 3 && passenger.getDay() > 29) {return false; }
+//        if (passenger.getMonth() == 3 && passenger.getDay() == 29 && passenger.getYear() % 4 != 0) {return false; }
         return true;
     }
 

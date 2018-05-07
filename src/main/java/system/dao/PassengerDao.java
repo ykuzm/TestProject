@@ -1,10 +1,13 @@
 package system.dao;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import system.model.Passenger;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.List;
 @Repository
 public class PassengerDao {
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     public PassengerDao() { }
@@ -24,14 +28,24 @@ public class PassengerDao {
 
     @SuppressWarnings("unchecked")
     public List<Passenger> getAllPassengers() {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session;
+        try {
+        session = this.sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
         List<Passenger> passengerList = session.createQuery("from Passenger").list();
         return passengerList;
     }
 
     public void addPassenger(Passenger passenger) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.persist(passenger);
+        Session session;
+        try {
+            session = this.sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        session.persist(new Passenger());
     }
 
 }

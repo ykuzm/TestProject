@@ -3,6 +3,7 @@ package system.model;
 import javax.persistence.*;
 
 @Entity
+@Embeddable
 @Table(name = "passenger_data")
 public class Passenger {
 

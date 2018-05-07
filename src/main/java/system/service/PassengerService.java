@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class PassengerService {
 
+    @Autowired
     private PassengerDao passengerDao;
 
     public PassengerService() { }
@@ -19,10 +20,8 @@ public class PassengerService {
 
     public void setPassengerDao(PassengerDao passengerDao) { this.passengerDao = passengerDao; }
 
-    @Transactional
     public List<Passenger> getAllPassengers(){ return this.passengerDao.getAllPassengers(); }
 
-    @Transactional
     public void addPassenger(Passenger passenger) {
         this.passengerDao.addPassenger(passenger);
     }

@@ -20,7 +20,7 @@
         <property name="url"
                   value="jdbc:mysql://localhost:3306/railway_app"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="YarKuz90!"/>
     </bean>
 
     <!-- Hibernate 5 SessionFactory Bean definition -->
@@ -49,7 +49,8 @@
         <property name="passengerDao" ref="passengerDao"/>
     </bean>
 
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+    <!--<tx:annotation-driven/>-->
+    <!--&lt;!&ndash;<tx:annotation-driven transaction-manager="transactionManager"/>&ndash;&gt;-->
 
     <!--<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
         <!--<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>-->
