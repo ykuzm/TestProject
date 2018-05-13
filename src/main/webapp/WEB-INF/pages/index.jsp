@@ -3,15 +3,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Incorrect login</title>
+    <title>Intro page</title>
     <link rel="stylesheet" href="../../static/css/style.css" type="text/css"/>
     <script type="text/javascript" src="../../static/js/jquery-1.11.2.js"></script>
     <script type="text/javascript" src="../../static/js/script_js.js"></script>
 </head>
 <body>
 <section class="logsection">
-    <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">Sorry, but your input data is incorrect. Follow the instructions!</div>
+    <div class="logdiv">
         <div class="buttonblock">
             <a href="/railway/login"><button class="button">Log in</button></a>
             <a href="/railway/register"><button class="button">Registration</button></a>
@@ -20,4 +19,3 @@
 </section>
 </body>
 </html>
-

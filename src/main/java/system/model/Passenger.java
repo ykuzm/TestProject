@@ -3,12 +3,15 @@ package system.model;
 import javax.persistence.*;
 
 @Entity
-@Embeddable
 @Table(name = "passenger_data")
 public class Passenger {
 
     @Id
-    @Column(name = "login")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true)
+    private String id;
+
+    @Column(name = "login", unique = true)
     private String login;
 
     @Column(name = "firstName")
@@ -30,6 +33,14 @@ public class Passenger {
     private String password;
 
     public Passenger() { }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;
@@ -89,14 +100,12 @@ public class Passenger {
 
     @Override
     public String toString() {
-        return "Passenger{" +
-                "login='" + login + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", day=" + day +
-                ", month=" + month +
-                ", year=" + year +
-                ", password='" + password + '\'' +
-                '}';
+        return "Passenger {" +
+                "id = " + id +
+                ", login = " + login +
+                ", firstName = " + firstName +
+                ", secondName = " + secondName +
+                ", birthdate = " + day + "-" + month + "-" + year +
+                ", password = " + password + " }";
     }
 }

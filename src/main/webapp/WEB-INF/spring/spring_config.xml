@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <mvc:annotation-driven />
     <context:component-scan base-package="system" />
-    <mvc:view-controller path="/userssystem" view-name="startup_page" />
+    <mvc:view-controller path="/railway" view-name="index" />
+
+    <mvc:resources mapping="/static/**" location="/static/" />
 
     <bean id="resolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/" />
@@ -20,7 +30,7 @@
         <property name="url"
                   value="jdbc:mysql://localhost:3306/railway_app"/>
         <property name="username" value="root"/>
-        <property name="password" value="YarKuz90!"/>
+        <property name="password" value="root"/>
     </bean>
 
     <!-- Hibernate 5 SessionFactory Bean definition -->
@@ -50,9 +60,9 @@
     </bean>
 
     <!--<tx:annotation-driven/>-->
-    <!--&lt;!&ndash;<tx:annotation-driven transaction-manager="transactionManager"/>&ndash;&gt;-->
+    <!--<tx:annotation-driven transaction-manager="44"/>-->
 
-    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
+    <!--<bean id="44" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
         <!--<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>-->
     <!--</bean>-->
 

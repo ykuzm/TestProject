@@ -3,6 +3,7 @@ package system.dao;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import system.model.Passenger;
@@ -15,7 +16,6 @@ import java.util.List;
 @Repository
 public class PassengerDao {
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     public PassengerDao() { }
@@ -45,7 +45,9 @@ public class PassengerDao {
         } catch (HibernateException e) {
             session = sessionFactory.openSession();
         }
-        session.persist(new Passenger());
+        Transaction transaction = session.beginTransaction();
+        session.persist(passenger);
+        transaction.commit();
     }
 
 }

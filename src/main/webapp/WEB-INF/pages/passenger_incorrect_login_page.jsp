@@ -1,22 +1,22 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Полина
-  Date: 06.05.2018
-  Time: 2:14
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Incorrect login-password</title>
+    <meta charset="UTF-8">
+    <title>Incorrect login</title>
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css"/>
+    <script type="text/javascript" src="../../static/js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="../../static/js/script_js.js"></script>
 </head>
 <body>
-    Sorry! But your login-password pair is incorrect!
-    <br><br>
-    <a href="/userssystem/login"><button>Try again</button></a>
-    <br><br>
-    <a href="/userssystem/register"><button>Register</button></a>
-    <br><br>
-    <a href="/userssystem"><button>StartUp page</button></a>
+<section class="logsection">
+    <div class="incorrectlogdiv">
+        <div class="incorrectinputtext">Sorry! But your pair login-password is incorrect. Try again to log in or register.</div>
+        <div class="buttonblock">
+            <a href="/railway/login"><button class="button">Log in</button></a>
+            <a href="/railway/register"><button class="button">Registration</button></a>
+        </div>
+    </div>
+</section>
 </body>
 </html>

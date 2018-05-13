@@ -11,7 +11,7 @@
 <body>
 <section class="logsection">
     <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">Sorry, but your input data is incorrect. Follow the instructions!</div>
+        <div class="incorrectinputtext">Sorry! You should log in to view internal pages.</div>
         <div class="buttonblock">
             <a href="/railway/login"><button class="button">Log in</button></a>
             <a href="/railway/register"><button class="button">Registration</button></a>
@@ -20,4 +20,3 @@
 </section>
 </body>
 </html>
-

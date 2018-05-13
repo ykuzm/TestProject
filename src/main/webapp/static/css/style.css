@@ -1,0 +1,142 @@
+/*Style for passenger_login_page*/
+body {
+    margin: 0px;
+}
+
+.logsection{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../static/img/train.jpg");
+    background-position: center;
+    background-size: cover;
+    display: table;
+}
+
+.logdiv{
+    width: 260px;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: lightgrey;
+}
+
+.loginputline{
+    margin-bottom: 20px;
+}
+
+.loginputline p{
+    float: left;
+    margin: 0px;
+    padding-right: 5px;
+    width: 100px;
+    font: 18pt Calibri;
+    margin-top: 2px;
+}
+
+.inputfield{
+    width: 150px;
+    font: 18pt Calibri
+}
+
+.buttonblock {
+    margin: 0px auto;
+    display: table;
+}
+
+.button{
+    margin: 0px 10px;
+    font: 18pt Calibri
+}
+
+/*Style for passengers_register_page*/
+.regdiv{
+    width: 310px;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: lightgrey;
+}
+
+.reginputline{
+    margin-bottom: 5px;
+}
+
+.reghint{
+    margin-bottom: 5px;
+    font: 10pt Calibri;
+    font-style: italic;
+}
+
+.reginputline p{
+    float: left;
+    margin: 0px;
+    padding-right: 5px;
+    width: 150px;
+    font: 18pt Calibri;
+    margin-top: 2px;
+}
+
+/*Style for passenger_incorrect_login_page*/
+.incorrectlogdiv{
+    width: 380px;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: lightgrey;
+}
+
+.incorrectinputtext{
+    font: 18pt Calibri;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/*Style for passenger_account_page*/
+.accountsection{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../static/img/train_acc.jpg");
+    background-position: center;
+    background-size: cover;
+    display: table;
+}
+
+.logoutdiv{
+    width: 100%;
+}
+
+.welcometext{
+    font: 18pt Calibri;
+    margin: 20px 20px;
+    float: left;
+}
+
+.logoutbutton{
+    margin: 20px 20px;
+    font: 18pt Calibri;
+    float: right;
+}
+
+.accountdiv{
+     width: 170px;
+     padding: 20px;
+     margin: 0px auto;
+     background-color: lightgrey;
+ }
+
+.button2{
+    margin: 10px 10px;
+    font: 18pt Calibri;
+    width: 150px;
+}
+
+/*Style for admin_account_page*/
+.adminaccountdiv{
+    width: 210px;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: lightgrey;
+}
+
+.button3{
+    margin: 10px 10px;
+    font: 18pt Calibri;
+    width: 190px;
+}
