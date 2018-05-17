@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <link rel="stylesheet" href="../../static/css/style.css" type="text/css"/>
-    <script type="text/javascript" src="../../static/js/jquery-1.11.2.js"></script>
-    <script type="text/javascript" src="../../static/js/script_js.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/jquery_ui.css" />
 </head>
 <body>
 <section class="logsection">
@@ -14,44 +13,51 @@
         <spring:form modelAttribute="passenger" method="post" action="/railway/register/result">
             <div class="reginputline">
                 <p>Login</p>
-                <spring:input class="inputfield" title="Login" path="login" />
+                <spring:input id="reglogininput" class="reginputfield" title="Login" path="login"
+                              onkeyup="javascript: checkLogin(); return false;" />
             </div>
-            <div class="reghint">Use only letters and numbers</div>
+            <div class="reghint">Use only letters and numbers, 4 symbols at least</div>
             <div class="reginputline">
                 <p>First name</p>
-                <spring:input class="inputfield" title="First name" path="firstName" />
+                <spring:input id="regfnameinput" class="reginputfield" title="First name" path="firstName"
+                              onkeyup="javascript: checkFName(); return false;" />
                 <div class="reghint">Use only letters, first letter in upper-case</div>
             </div>
             <div class="reginputline">
                 <p>Second name</p>
-                <spring:input class="inputfield" title="Second name" path="secondName" />
+                <spring:input id="regsnameinput" class="reginputfield" title="Second name" path="secondName"
+                              onkeyup="javascript: checkSName(); return false;" />
                 <div class="reghint">Use only letters, first letter in upper-case</div>
             </div>
             <div class="reginputline">
-                <p>Day</p>
-                <spring:input class="inputfield" title="Day" path="day" />
-                <div class="reghint">Number should be between 1 and 31</div>
-            </div>
-            <div class="reginputline">
-                <p>Month</p>
-                <spring:input class="inputfield" title="Month" path="month" />
-                <div class="reghint">Number should be between 1 and 12</div>
-            </div>
-            <div class="reginputline">
-                <p>Year</p>
-                <spring:input class="inputfield" title="Year" path="year" />
-                <div class="reghint">Number should be between 1900 and 2000</div>
+                <p>Birth date</p>
+                <spring:input id="regbirthdateinput" class="reginputfield" title="BirthDate" path="birthDate"
+                              onchange="javascript: checkBirthDate(); return false;" />
+                <div class="reghint">Pick the your birth date (e.g. 03-May-1984)</div>
             </div>
             <div class="reginputline">
                 <p>Password</p>
-                <spring:input class="inputfield" title="Password" path="password" />
-                <div class="reghint">Use only letters and numbers</div>
+                <spring:input id="regpasswordinput" class="reginputfield" title="Password" path="password"
+                              onkeyup="javascript: checkPassword(); return false;" />
+                <div class="reghint">Use only letters and number, 4 symbols at least</div>
             </div>
             <div class="buttonblock">
-                <spring:button class="button">Register</spring:button>
+                <spring:button id="regbutton" class="button" disabled="true">Register</spring:button>
             </div>
         </spring:form>
+        <div class="buttonblock">
+            <a href="/railway/"><button class="button">Start page</button></a>
+        </div>
     </div>
 </section>
+    <script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="/static/js/jquery_ui_v1.9.2.js"></script>
+    <script type="text/javascript" src="/static/js/script_js.js"></script>
+    <script type="text/javascript" src="/static/js/input_reg_valid_check.js"></script>
+    <script>
+        $(function() {
+           $( "#regbirthdateinput" ).datepicker({dateFormat:"dd-MM-yy"});
+        });
+    </script>
 </body>
 </html>

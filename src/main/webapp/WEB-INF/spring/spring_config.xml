@@ -30,7 +30,7 @@
         <property name="url"
                   value="jdbc:mysql://localhost:3306/railway_app"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="YarKuz90!"/>
     </bean>
 
     <!-- Hibernate 5 SessionFactory Bean definition -->
@@ -40,6 +40,9 @@
         <property name="annotatedClasses">
             <list>
                 <value>system.model.Passenger</value>
+                <value>system.model.Train</value>
+                <value>system.model.Station</value>
+                <value>system.model.Ticket</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -57,6 +60,33 @@
 
     <bean id="passengerService" class="system.service.PassengerService">
         <property name="passengerDao" ref="passengerDao"/>
+    </bean>
+
+    <!--TrainDao and TrainService beans-->
+    <bean id="trainDao" class="system.dao.TrainDao">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="trainService" class="system.service.TrainService">
+        <property name="trainDao" ref="trainDao"/>
+    </bean>
+
+    <!--StationDao and StationService beans-->
+    <bean id="stationDao" class="system.dao.StationDao">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="stationService" class="system.service.StationService">
+        <property name="stationDao" ref="stationDao"/>
+    </bean>
+
+    <!--TicketDao and TicketService beans-->
+    <bean id="ticketDao" class="system.dao.TicketDao">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="ticketService" class="system.service.TicketService">
+        <property name="ticketDao" ref="ticketDao"/>
     </bean>
 
     <!--<tx:annotation-driven/>-->

@@ -7,6 +7,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import system.model.Passenger;
+import system.model.Station;
+import system.model.Train;
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -15,11 +17,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class PassengerDao {
+public class StationDao {
 
     private SessionFactory sessionFactory;
 
-    public PassengerDao() { }
+    public StationDao() { }
 
     public SessionFactory getSessionFactory() { return sessionFactory; }
 
@@ -28,46 +30,46 @@ public class PassengerDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Passenger> getAllPassengers() {
-        Session session;
-        try {
-        session = this.sessionFactory.getCurrentSession();
-        } catch (HibernateException e) {
-            session = sessionFactory.openSession();
-        }
-        List<Passenger> passengerList = session.createQuery("from Passenger" ).list();
-        return passengerList;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Passenger> getPassengerByLogin(String login) {
+    public List<Station> getAllStations() {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
             session = sessionFactory.openSession();
         }
-        Query query = session.createQuery("from Passenger p where p.login=:login");
-        query.setParameter("login", login);
-        List<Passenger> passengerList = ((org.hibernate.query.Query) query).list();
-        return passengerList;
+        List<Station> stationList = session.createQuery("from Station" ).list();
+        return stationList;
     }
 
     @SuppressWarnings("unchecked")
-    public List<Passenger> getPassengerById(int id) {
+    public List<Station> getStationById(int id) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
             session = sessionFactory.openSession();
         }
-        Query query = session.createQuery("from Passenger p where p.id=:id");
+        Query query = session.createQuery("from Station s where s.id=:id");
         query.setParameter("id", id);
-        List<Passenger> passengerList = ((org.hibernate.query.Query) query).list();
-        return passengerList;
+        List<Station> stationList = ((org.hibernate.query.Query) query).list();
+        return stationList;
     }
 
-    public void addPassenger(Passenger passenger) {
+    @SuppressWarnings("unchecked")
+    public List<Station> getStationByName(String name) {
+        Session session;
+        try {
+            session = this.sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        Query query = session.createQuery("from Station s where s.name=:name");
+        query.setParameter("name", name);
+        List<Station> stationList = ((org.hibernate.query.Query) query).list();
+        return stationList;
+    }
+
+    public void addStation(Station station) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
@@ -75,9 +77,8 @@ public class PassengerDao {
             session = sessionFactory.openSession();
         }
         Transaction transaction = session.beginTransaction();
-        session.persist(passenger);
+        session.persist(station);
         transaction.commit();
-        session.close();
     }
 
 }

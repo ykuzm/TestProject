@@ -1,6 +1,9 @@
 package system.model;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 @Table(name = "passenger_data")
@@ -9,7 +12,7 @@ public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
-    private String id;
+    private int id;
 
     @Column(name = "login", unique = true)
     private String login;
@@ -20,25 +23,22 @@ public class Passenger {
     @Column(name = "secondName")
     private String secondName;
 
-    @Column(name = "day")
-    private int day;
-
-    @Column(name = "month")
-    private int month;
-
-    @Column(name = "year")
-    private int year;
+    @Column(name = "birthDate")
+    private Date birthDate;
 
     @Column(name = "password")
     private String password;
 
+    @Column(name = "admin")
+    private boolean admin;
+
     public Passenger() { }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -66,28 +66,12 @@ public class Passenger {
         this.secondName = secondName;
     }
 
-    public int getDay() {
-        return day;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getPassword() {
@@ -98,14 +82,24 @@ public class Passenger {
         this.password = password;
     }
 
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    private void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
     @Override
     public String toString() {
-        return "Passenger {" +
-                "id = " + id +
-                ", login = " + login +
-                ", firstName = " + firstName +
-                ", secondName = " + secondName +
-                ", birthdate = " + day + "-" + month + "-" + year +
-                ", password = " + password + " }";
+        return "Passenger{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", birthDate=" + birthDate +
+                ", password='" + password + '\'' +
+                ", admin=" + admin +
+                '}';
     }
 }

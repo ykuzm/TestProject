@@ -22,6 +22,10 @@ public class PassengerService {
 
     public List<Passenger> getAllPassengers(){ return this.passengerDao.getAllPassengers(); }
 
+    public List<Passenger> getPassengerByLogin(String login){ return this.passengerDao.getPassengerByLogin(login); }
+
+    public List<Passenger> getPassengerById(int id){ return this.passengerDao.getPassengerById(id); }
+
     public void addPassenger(Passenger passenger) {
         this.passengerDao.addPassenger(passenger);
     }

@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Successfull registration</title>
-    <link rel="stylesheet" href="../../static/css/style.css" type="text/css"/>
-    <script type="text/javascript" src="../../static/js/jquery-1.11.2.js"></script>
-    <script type="text/javascript" src="../../static/js/script_js.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
 <section class="logsection">
@@ -17,5 +15,7 @@
         </div>
     </div>
 </section>
+<script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/static/js/script_js.js"></script>
 </body>
 </html>

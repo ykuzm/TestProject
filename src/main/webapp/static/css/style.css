@@ -13,14 +13,14 @@ body {
 }
 
 .logdiv{
-    width: 260px;
+    width: 280px;
     padding: 20px;
     margin: 0px auto;
     background-color: lightgrey;
 }
 
 .loginputline{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .loginputline p{
@@ -33,8 +33,16 @@ body {
 }
 
 .inputfield{
-    width: 150px;
-    font: 18pt Calibri
+    width: 165px;
+    font: 18pt Calibri;
+    border: 2px solid red;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+.inputfield.correct{
+    border: 2px solid green;
 }
 
 .buttonblock {
@@ -49,7 +57,7 @@ body {
 
 /*Style for passengers_register_page*/
 .regdiv{
-    width: 310px;
+    width: 380px;
     padding: 20px;
     margin: 0px auto;
     background-color: lightgrey;
@@ -57,6 +65,19 @@ body {
 
 .reginputline{
     margin-bottom: 5px;
+}
+
+.reginputfield{
+    width: 220px;
+    font: 18pt Calibri;
+    border: 2px solid red;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+.reginputfield.correct{
+    border: 2px solid green;
 }
 
 .reghint{
@@ -139,4 +160,48 @@ body {
     margin: 10px 10px;
     font: 18pt Calibri;
     width: 190px;
+}
+
+/*Styles for train number input*/
+.trainnumberinputline{
+    margin-bottom: 5px;
+}
+
+.trainnumberinputline p{
+    float: left;
+    margin: 0px;
+    padding-right: 5px;
+    width: 150px;
+    font: 18pt Calibri;
+    margin-top: 2px;
+}
+
+.smallinputfield{
+    width: 125px;
+    font: 18pt Calibri;
+    border: 2px solid red;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+.smallinputfield.correct{
+    border: 2px solid green;
+}
+
+/*Styles for train-ticket list*/
+.table{
+    border-collapse: collapse;
+    margin: 0px auto;
+    margin-bottom: 20px;
+    text-align: center;
+    font: 18pt Calibri;
+}
+
+.tableheader{
+    border: 2px solid black;
+}
+
+.tablecell{
+    border: 2px solid black;
 }

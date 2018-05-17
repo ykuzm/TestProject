@@ -1,17 +1,19 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Account already exists</title>
+    <title>Thank you!</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
-<section class="logsection">
+<section class="accountsection">
     <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">Sorry! But account with this login already exists. Try another one.</div>
+        <div class="incorrectinputtext">You have successfully purchased your ticket!</div>
         <div class="buttonblock">
-            <a href="/railway/register"><button class="button">Registration</button></a>
+            <a href="/railway/account/buyticket"><button class="button">Buy another ticket</button></a>
+        </div>
+        <div class="buttonblock">
+            <a href="/railway/account"><button class="button">Account</button></a>
         </div>
     </div>
 </section>

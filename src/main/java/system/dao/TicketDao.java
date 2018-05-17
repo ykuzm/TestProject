@@ -7,6 +7,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import system.model.Passenger;
+import system.model.Ticket;
+import system.model.Train;
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -15,11 +17,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class PassengerDao {
+public class TicketDao {
 
     private SessionFactory sessionFactory;
 
-    public PassengerDao() { }
+    public TicketDao() { }
 
     public SessionFactory getSessionFactory() { return sessionFactory; }
 
@@ -28,46 +30,62 @@ public class PassengerDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Passenger> getAllPassengers() {
-        Session session;
-        try {
-        session = this.sessionFactory.getCurrentSession();
-        } catch (HibernateException e) {
-            session = sessionFactory.openSession();
-        }
-        List<Passenger> passengerList = session.createQuery("from Passenger" ).list();
-        return passengerList;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Passenger> getPassengerByLogin(String login) {
+    public List<Ticket> getAllTickets() {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
             session = sessionFactory.openSession();
         }
-        Query query = session.createQuery("from Passenger p where p.login=:login");
-        query.setParameter("login", login);
-        List<Passenger> passengerList = ((org.hibernate.query.Query) query).list();
-        return passengerList;
+        List<Ticket> ticketList = session.createQuery("from Ticket" ).list();
+        return ticketList;
     }
 
     @SuppressWarnings("unchecked")
-    public List<Passenger> getPassengerById(int id) {
+    public List<Ticket> getTicketByPassengerId(int passengerId) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
             session = sessionFactory.openSession();
         }
-        Query query = session.createQuery("from Passenger p where p.id=:id");
-        query.setParameter("id", id);
-        List<Passenger> passengerList = ((org.hibernate.query.Query) query).list();
-        return passengerList;
+        Query query = session.createQuery("from Ticket t where t.passengerId=:passengerId");
+        query.setParameter("passengerId", passengerId);
+        List<Ticket> ticketList = ((org.hibernate.query.Query) query).list();
+        return ticketList;
     }
 
-    public void addPassenger(Passenger passenger) {
+    @SuppressWarnings("unchecked")
+    public List<Ticket> getTicketByTrainId(int trainId) {
+        Session session;
+        try {
+            session = this.sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        Query query = session.createQuery("from Ticket t where t.trainId=:trainId");
+        query.setParameter("trainId", trainId);
+        List<Ticket> ticketList = ((org.hibernate.query.Query) query).list();
+        return ticketList;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Ticket> getTicketByPassengerIdAndTrainId(int passengerId, int trainId) {
+        Session session;
+        try {
+            session = this.sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        Query query = session.createQuery("from Ticket t where t.passengerId=:passengerId " +
+                "and t.trainId=:trainId");
+        query.setParameter("passengerId", passengerId);
+        query.setParameter("trainId", trainId);
+        List<Ticket> ticketList = ((org.hibernate.query.Query) query).list();
+        return ticketList;
+    }
+
+    public void addTicket(Ticket ticket) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
@@ -75,7 +93,7 @@ public class PassengerDao {
             session = sessionFactory.openSession();
         }
         Transaction transaction = session.beginTransaction();
-        session.persist(passenger);
+        session.persist(ticket);
         transaction.commit();
         session.close();
     }

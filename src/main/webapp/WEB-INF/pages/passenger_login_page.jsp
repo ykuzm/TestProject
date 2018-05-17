@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Log in</title>
-    <link rel="stylesheet" href="../../static/css/style.css" type="text/css"/>
-    <script type="text/javascript" src="../../static/js/jquery-1.11.2.js"></script>
-    <script type="text/javascript" src="../../static/js/script_js.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
 <section class="logsection">
@@ -14,17 +12,27 @@
         <spring:form modelAttribute="passenger" method="post" action="/railway/login/result">
             <div class="loginputline">
                 <p>Login</p>
-                <spring:input class="inputfield" title="Login" path="login" />
+                <spring:input id="loglogininput" class="inputfield" title="Login" path="login"
+                              onkeyup="javascript: checkLogin(); return false;" />
             </div>
+            <div class="reghint">Use only letters and numbers, 4 symbols at least</div>
             <div class="loginputline">
                 <p>Password</p>
-                <spring:input class="inputfield" title="Password" path="password" />
+                <spring:input id="logpasswordinput" class="inputfield" title="Password" path="password"
+                              onkeyup="javascript: checkPassword(); return false;" />
             </div>
+            <div class="reghint">Use only letters and number, 4 symbols at least</div>
             <div class="buttonblock">
-                <spring:button class="button">Submit</spring:button>
+                <spring:button id="logbutton" class="button" disabled="true">Submit</spring:button>
             </div>
         </spring:form>
+        <div class="buttonblock">
+            <a href="/railway/"><button class="button">Start page</button></a>
+        </div>
     </div>
 </section>
+<script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/static/js/script_js.js"></script>
+<script type="text/javascript" src="/static/js/input_log_valid_check.js"></script>
 </body>
 </html>
