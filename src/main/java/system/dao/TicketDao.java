@@ -38,6 +38,7 @@ public class TicketDao {
             session = sessionFactory.openSession();
         }
         List<Ticket> ticketList = session.createQuery("from Ticket" ).list();
+        session.close();
         return ticketList;
     }
 
@@ -52,6 +53,7 @@ public class TicketDao {
         Query query = session.createQuery("from Ticket t where t.passengerId=:passengerId");
         query.setParameter("passengerId", passengerId);
         List<Ticket> ticketList = ((org.hibernate.query.Query) query).list();
+        session.close();
         return ticketList;
     }
 
@@ -66,11 +68,12 @@ public class TicketDao {
         Query query = session.createQuery("from Ticket t where t.trainId=:trainId");
         query.setParameter("trainId", trainId);
         List<Ticket> ticketList = ((org.hibernate.query.Query) query).list();
+        session.close();
         return ticketList;
     }
 
     @SuppressWarnings("unchecked")
-    public List<Ticket> getTicketByPassengerIdAndTrainId(int passengerId, int trainId) {
+    public Ticket getTicketByPassengerIdAndTrainId(int passengerId, int trainId) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
@@ -82,7 +85,11 @@ public class TicketDao {
         query.setParameter("passengerId", passengerId);
         query.setParameter("trainId", trainId);
         List<Ticket> ticketList = ((org.hibernate.query.Query) query).list();
-        return ticketList;
+        session.close();
+        if (ticketList.size() == 0) {
+            return null;
+        }
+        return ticketList.get(0);
     }
 
     public void addTicket(Ticket ticket) {

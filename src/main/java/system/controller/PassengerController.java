@@ -32,7 +32,7 @@ public class PassengerController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public String getAllPassengers(){
-        return this.passengerService.getPassengerByLogin("user2").toString();
+        return this.passengerService.getAllPassengers().toString();
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -52,31 +52,32 @@ public class PassengerController {
     }
 
     @RequestMapping(value = "/login/result", method = RequestMethod.POST)
-    public ModelAndView checkLogin(@ModelAttribute("passenger") Passenger passenger){
+    public ModelAndView loginResult(@ModelAttribute("passenger") Passenger passenger, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         if(passenger.getLogin() == null) {
             modelAndView.setViewName("passenger_need_to_login_page");
             return modelAndView;
         }
-        List<Passenger> passengerList = passengerService.getPassengerByLogin(passenger.getLogin());
-        if (passengerList.size() != 0 && passengerList.get(0).getPassword().equals(passenger.getPassword())) {
-            modelAndView.addObject("passenger", passengerList.get(0));
+        try {
+            Passenger passenger1 = passengerService.login(passenger);
+            modelAndView.addObject("passenger", passenger1);
             modelAndView.setViewName("passenger_correct_login_page");
-            return modelAndView;
+            request.getSession().setAttribute("passenger", passenger1);
+        } catch (Exception e) {
+            modelAndView.addObject("exception", e.getMessage());
+            modelAndView.setViewName("passenger_incorrect_login_page");
         }
-        modelAndView.setViewName("passenger_incorrect_login_page");
         return modelAndView;
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.POST)
-    public ModelAndView goToAccount(@ModelAttribute("passenger") Passenger passenger, HttpServletRequest request){
+    public ModelAndView goToAccount(@ModelAttribute("passenger") Passenger passenger){
         ModelAndView modelAndView = new ModelAndView();
         if(passenger.getLogin() == null) {
             modelAndView.setViewName("passenger_need_to_login_page");
             return modelAndView;
         }
         modelAndView.addObject("passenger", passenger);
-        request.getSession().setAttribute("passenger", passenger);
         if (passenger.isAdmin()) {
             modelAndView.setViewName("passenger_admin_account_page");
         }
@@ -95,20 +96,22 @@ public class PassengerController {
     }
 
     @RequestMapping(value = "/register/result", method = RequestMethod.POST)
-    public ModelAndView checkRegister(@ModelAttribute("passenger") Passenger passenger){
+    public ModelAndView registerResult(@ModelAttribute("passenger") Passenger passenger, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         if(passenger.getLogin() == null) {
             modelAndView.setViewName("passenger_need_to_login_page");
             return modelAndView;
         }
-        List<Passenger> passengerList = passengerService.getPassengerByLogin(passenger.getLogin());
-        if (passengerList.size() != 0) {
+        try {
+            passengerService.addPassenger(passenger);
+            modelAndView.addObject("passenger", passenger);
+            modelAndView.setViewName("passenger_correct_register_page");
+            request.getSession().setAttribute("passenger", passenger);
+        } catch (Exception e) {
+            modelAndView.addObject("exception", e.getMessage());
             modelAndView.setViewName("passenger_already_exists_page");
             return modelAndView;
         }
-        passengerService.addPassenger(passenger);
-        modelAndView.addObject("passenger", passenger);
-        modelAndView.setViewName("passenger_correct_register_page");
         return modelAndView;
     }
 }

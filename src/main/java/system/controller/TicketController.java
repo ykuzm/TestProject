@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 @Controller
-//@SessionAttributes(value="ticket")
 @RequestMapping(value = "/railway", method = RequestMethod.GET)
 public class TicketController {
 

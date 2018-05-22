@@ -3,21 +3,24 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Buy ticket</title>
+    <title>Add station</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
 <section class="accountsection">
-    <div class="ticketbuydiv">
-        <spring:form modelAttribute="train" method="post" action="/railway/account/buyticket/result">
+    <div class="stationnamediv">
+        <h1 class="text">
+            Station add
+        </h1>
+        <spring:form modelAttribute="station" method="post" action="/railway/account/addstation/result">
             <div class="trainnumberinputline">
-                <p>Train number</p>
-                <spring:input id="trainnumberinput" class="smallinputfield" title="number" path="number"
-                              onkeyup="javascript: checkTrainNumber(); return false;" />
+                <p>Station name</p>
+                <spring:input id="stationaddnameinput" class="largeinputfield" title="name" path="name"
+                              onkeyup="javascript: checkAddStationName(); return false;" />
             </div>
-            <div class="reghint">Input train number (from 1 to 999)</div>
+            <div class="reghint">Use only letters and -, first letter in upper-case</div>
             <div class="buttonblock">
-                <spring:button id="ticketbuybutton" class="button" disabled="true">Buy</spring:button>
+                <spring:button id="stationaddbutton" class="button" disabled="true">Add station</spring:button>
             </div>
         </spring:form>
         <div class="buttonblock">

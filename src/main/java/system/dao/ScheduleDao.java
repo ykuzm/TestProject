@@ -7,7 +7,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import system.model.Passenger;
-import system.model.Station;
+import system.model.Schedule;
+import system.model.Train;
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -16,11 +17,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class PassengerDao {
+public class ScheduleDao {
 
     private SessionFactory sessionFactory;
 
-    public PassengerDao() { }
+    public ScheduleDao() { }
 
     public SessionFactory getSessionFactory() { return sessionFactory; }
 
@@ -29,55 +30,49 @@ public class PassengerDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Passenger> getAllPassengers() {
-        Session session;
-        try {
-        session = this.sessionFactory.getCurrentSession();
-        } catch (HibernateException e) {
-            session = sessionFactory.openSession();
-        }
-        List<Passenger> passengerList = session.createQuery("from Passenger" ).list();
-        session.close();
-        return passengerList;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Passenger getPassengerById(int id) {
+    public List<Schedule> getAllSchedule() {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
             session = sessionFactory.openSession();
         }
-        Query query = session.createQuery("from Passenger p where p.id=:id");
-        query.setParameter("id", id);
-        List<Passenger> passengerList = ((org.hibernate.query.Query) query).list();
+        List<Schedule> sceduleList = session.createQuery("from Schedule" ).list();
         session.close();
-        if (passengerList.size() == 0) {
-            return null;
-        }
-        return passengerList.get(0);
+        return sceduleList;
     }
 
     @SuppressWarnings("unchecked")
-    public Passenger getPassengerByLogin(String login) {
+    public List<Schedule> getScheduleByTrainId(int trainId) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
             session = sessionFactory.openSession();
         }
-        Query query = session.createQuery("from Passenger p where p.login=:login");
-        query.setParameter("login", login);
-        List<Passenger> passengerList = ((org.hibernate.query.Query) query).list();
+        Query query = session.createQuery("from Schedule s where s.trainId=:trainId");
+        query.setParameter("trainId", trainId);
+        List<Schedule> scheduleList = ((org.hibernate.query.Query) query).list();
         session.close();
-        if (passengerList.size() == 0) {
-            return null;
-        }
-        return passengerList.get(0);
+        return scheduleList;
     }
 
-    public void addPassenger(Passenger passenger) {
+    @SuppressWarnings("unchecked")
+    public List<Schedule> getScheduleByStationId(int stationId) {
+        Session session;
+        try {
+            session = this.sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        Query query = session.createQuery("from Schedule s where s.stationId=:stationId");
+        query.setParameter("stationId", stationId);
+        List<Schedule> scheduleList = ((org.hibernate.query.Query) query).list();
+        session.close();
+        return scheduleList;
+    }
+
+    public void addSchedule(Schedule schedule) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
@@ -85,7 +80,7 @@ public class PassengerDao {
             session = sessionFactory.openSession();
         }
         Transaction transaction = session.beginTransaction();
-        session.persist(passenger);
+        session.persist(schedule);
         transaction.commit();
         session.close();
     }

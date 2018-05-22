@@ -37,11 +37,12 @@ public class TrainDao {
             session = sessionFactory.openSession();
         }
         List<Train> trainList = session.createQuery("from Train" ).list();
+        session.close();
         return trainList;
     }
 
     @SuppressWarnings("unchecked")
-    public List<Train> getTrainById(int id) {
+    public Train getTrainById(int id) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
@@ -51,11 +52,15 @@ public class TrainDao {
         Query query = session.createQuery("from Train t where t.id=:id");
         query.setParameter("id", id);
         List<Train> trainList = ((org.hibernate.query.Query) query).list();
-        return trainList;
+        session.close();
+        if (trainList.size() == 0) {
+            return null;
+        }
+        return trainList.get(0);
     }
 
     @SuppressWarnings("unchecked")
-    public List<Train> getTrainByNumber(int number) {
+    public Train getTrainByNumber(int number) {
         Session session;
         try {
             session = this.sessionFactory.getCurrentSession();
@@ -65,7 +70,11 @@ public class TrainDao {
         Query query = session.createQuery("from Train t where t.number=:number");
         query.setParameter("number", number);
         List<Train> trainList = ((org.hibernate.query.Query) query).list();
-        return trainList;
+        session.close();
+        if (trainList.size() == 0) {
+            return null;
+        }
+        return trainList.get(0);
     }
 
     public void reduceFreeSeats(Train train) {
@@ -76,7 +85,6 @@ public class TrainDao {
             session = sessionFactory.openSession();
         }
         int freeSeats = train.getFreeSeats() - 1;
-        System.out.println(freeSeats);
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("update Train set freeSeats=:freeSeats where id=:id");
         query.setParameter("freeSeats", freeSeats);
@@ -96,6 +104,7 @@ public class TrainDao {
         Transaction transaction = session.beginTransaction();
         session.persist(train);
         transaction.commit();
+        session.close();
     }
 
 }

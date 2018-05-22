@@ -28,9 +28,9 @@
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
-                  value="jdbc:mysql://localhost:3306/railway_app"/>
+                  value="jdbc:mysql://localhost:3306/railway_app?useSSL=false"/>
         <property name="username" value="root"/>
-        <property name="password" value="YarKuz90!"/>
+        <property name="password" value="root"/>
     </bean>
 
     <!-- Hibernate 5 SessionFactory Bean definition -->
@@ -43,6 +43,7 @@
                 <value>system.model.Train</value>
                 <value>system.model.Station</value>
                 <value>system.model.Ticket</value>
+                <value>system.model.Schedule</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -89,11 +90,20 @@
         <property name="ticketDao" ref="ticketDao"/>
     </bean>
 
-    <!--<tx:annotation-driven/>-->
-    <!--<tx:annotation-driven transaction-manager="44"/>-->
+    <!--ScheduleDao and ScheduleService beans-->
+    <bean id="scheduleDao" class="system.dao.ScheduleDao">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
 
-    <!--<bean id="44" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
-        <!--<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>-->
-    <!--</bean>-->
+    <bean id="scheduleService" class="system.service.ScheduleService">
+        <property name="scheduleDao" ref="scheduleDao"/>
+    </bean>
+
+    <!--<tx:annotation-driven/>-->
+    <tx:annotation-driven transaction-manager="tm"/>
+
+    <bean id="tm" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
 
 </beans>

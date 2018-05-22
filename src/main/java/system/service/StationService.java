@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import system.dao.PassengerDao;
 import system.dao.StationDao;
 import system.dao.TrainDao;
+import system.exceptions.CantAddDataException;
+import system.exceptions.NotFoundInDatabaseException;
 import system.model.Passenger;
 import system.model.Station;
 import system.model.Train;
@@ -24,14 +26,25 @@ public class StationService {
 
     public void setStationDao(StationDao stationDao) { this.stationDao = stationDao; }
 
-    public List<Station> getAllStations(){ return this.stationDao.getAllStations(); }
+    public List<Station> getAllStations(){ return stationDao.getAllStations(); }
 
-    public List<Station> getStationById(int id){ return this.stationDao.getStationById(id); }
+    public Station getStationById(int id){ return stationDao.getStationById(id); }
 
-    public List<Station> getStationByName(String name){ return this.stationDao.getStationByName(name); }
+    public Station getStationByName(String name) throws NotFoundInDatabaseException {
+        Station station = stationDao.getStationByName(name);
+        if (station == null) {
+            throw new NotFoundInDatabaseException("There is no station with the name " + name);
+        }
+        return station;
+    }
 
-    public void addStation(Station station) {
-        this.stationDao.addStation(station);
+    public void addStation(Station station) throws CantAddDataException {
+        try {
+            Station station1 = getStationByName(station.getName());
+            throw new CantAddDataException("Station " + station.getName() + " already exists.");
+        } catch (NotFoundInDatabaseException e) {
+            stationDao.addStation(station);
+        }
     }
 
 }

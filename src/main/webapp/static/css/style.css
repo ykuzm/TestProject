@@ -3,6 +3,13 @@ body {
     margin: 0px;
 }
 
+.text{
+    font: 18pt Calibri;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    text-align: center;
+}
+
 .logsection{
     width: 100%;
     height: 100vh;
@@ -163,6 +170,13 @@ body {
 }
 
 /*Styles for train number input*/
+.ticketbuydiv{
+    width: 315px;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: lightgrey;
+}
+
 .trainnumberinputline{
     margin-bottom: 5px;
 }
@@ -171,7 +185,7 @@ body {
     float: left;
     margin: 0px;
     padding-right: 5px;
-    width: 150px;
+    width: 185px;
     font: 18pt Calibri;
     margin-top: 2px;
 }
@@ -200,8 +214,42 @@ body {
 
 .tableheader{
     border: 2px solid black;
+    padding: 5px;
 }
 
 .tablecell{
     border: 2px solid black;
+    padding: 5px;
+}
+
+/*Styles for correct ticket buy*/
+.button4{
+    margin-bottom: 10px;
+    font: 18pt Calibri;
+}
+
+/*Styles for station name input*/
+.stationnamediv{
+    width: 415px;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: lightgrey;
+}
+
+.largeinputfield{
+    width: 220px;
+    font: 18pt Calibri;
+    border: 2px solid red;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+.largeinputfield.correct{
+    border: 2px solid green;
+}
+
+/*Styles for scedule info page*/
+.tablecaption{
+    width: 320px;
 }

@@ -74,3 +74,176 @@ function turnOnBuyButton() {
         ticketbuybutton.disabled = true;
     }
 }
+
+// Checking correct station name input
+var stationName = document.getElementById("stationnameinput");
+var stationNameRegex = new RegExp("^[^A-Z].*|.+[^a-zA-Z\-].*");
+
+function checkStationName() {
+    if (stationNameRegex.test(stationName.value) || stationName.value == "") {
+        if (stationName.classList.contains("correct")) {
+            stationName.classList.remove("correct");
+            turnOnStationButton();
+        }
+    }
+    else {
+        if (!stationName.classList.contains("correct")) {
+            stationName.classList.add("correct");
+            turnOnStationButton();
+        }
+    }
+}
+
+var stationinfobutton = document.getElementById("stationinfobutton");
+
+function turnOnStationButton() {
+    if (stationName.classList.contains("correct")) {
+        stationinfobutton.disabled = false;
+    }
+    else {
+        stationinfobutton.disabled = true;
+    }
+}
+
+// Checking correct station names for train search
+var stationName1 = document.getElementById("stationnameinput1");
+
+function checkStation1Name() {
+    if (stationNameRegex.test(stationName1.value) || stationName1.value == "") {
+        if (stationName1.classList.contains("correct")) {
+            stationName1.classList.remove("correct");
+            turnOnSearchButton();
+        }
+    }
+    else {
+        if (!stationName1.classList.contains("correct")) {
+            stationName1.classList.add("correct");
+            turnOnSearchButton();
+        }
+    }
+}
+
+var stationName2 = document.getElementById("stationnameinput2");
+
+function checkStation2Name() {
+    if (stationNameRegex.test(stationName2.value) || stationName2.value == "") {
+        if (stationName2.classList.contains("correct")) {
+            stationName2.classList.remove("correct");
+            turnOnSearchButton();
+        }
+    }
+    else {
+        if (!stationName2.classList.contains("correct")) {
+            stationName2.classList.add("correct");
+            turnOnSearchButton();
+        }
+    }
+}
+
+var dateRegex = new RegExp("^(([0-2][1-9]|3[01])-(January|March|May|July|August|October|December)|" +
+    "([0-2][1-9]|30)-(April|June|September|November)|([0-2][1-9])-(February))-[2][0][1][8]$");
+var departureDate = document.getElementById("departuredate");
+
+function checkDepatureDate() {
+    if (!dateRegex.test(departureDate.value) || departureDate.value == "") {
+        if (departureDate.classList.contains("correct")) {
+            departureDate.classList.remove("correct");
+            turnOnSearchButton();
+        }
+    }
+    else {
+        if (!departureDate.classList.contains("correct")) {
+            departureDate.classList.add("correct");
+            turnOnSearchButton();
+        }
+    }
+}
+
+var trainsearchbutton = document.getElementById("trainsearchbutton");
+
+function turnOnSearchButton() {
+    if (stationName1.classList.contains("correct") && stationName2.classList.contains("correct") &&
+        departureDate.classList.contains("correct")) {
+        trainsearchbutton.disabled = false;
+    }
+    else {
+        trainsearchbutton.disabled = true;
+    }
+}
+
+// Checking input for train_add_page
+var trainAddNumber = document.getElementById("trainaddnumberinput");
+var trainAddNumberRegex = new RegExp("^[^1-9].*|.*[^0-9].*");
+
+function checkTrainAddNumber() {
+    if (trainAddNumberRegex.test(trainAddNumber.value) || trainAddNumber.value == "" || trainAddNumber.value.length > 3) {
+        if (trainAddNumber.classList.contains("correct")) {
+            trainAddNumber.classList.remove("correct");
+            turnOnAddTrainButton();
+        }
+    }
+    else {
+        if (!trainAddNumber.classList.contains("correct")) {
+            trainAddNumber.classList.add("correct");
+            turnOnAddTrainButton();
+        }
+    }
+}
+
+var trainAddSeats = document.getElementById("trainaddseatsinput");
+
+function checkTrainAddSeats() {
+    if (trainAddNumberRegex.test(trainAddSeats.value) || trainAddSeats.value == "" || trainAddSeats.value.length > 3) {
+        if (trainAddSeats.classList.contains("correct")) {
+            trainAddSeats.classList.remove("correct");
+            turnOnAddTrainButton();
+        }
+    }
+    else {
+        if (!trainAddSeats.classList.contains("correct")) {
+            trainAddSeats.classList.add("correct");
+            turnOnAddTrainButton();
+        }
+    }
+}
+
+var trainAddButton = document.getElementById("addtrainbutton");
+
+function turnOnAddTrainButton() {
+    if (trainAddNumber.classList.contains("correct") && trainAddSeats.classList.contains("correct")) {
+        trainAddButton.disabled = false;
+    }
+    else {
+        trainAddButton.disabled = true;
+    }
+}
+
+// Checking for station_add_page
+var stationAddName = document.getElementById("stationaddnameinput");
+var stationAddNameRegex = new RegExp("^[^A-Z].*|.+[^a-zA-Z\-].*");
+
+function checkAddStationName() {
+    if (stationAddNameRegex.test(stationAddName.value) || stationAddName.value == "") {
+        if (stationAddName.classList.contains("correct")) {
+            stationAddName.classList.remove("correct");
+            turnOnAddStationButton();
+        }
+    }
+    else {
+        if (!stationAddName.classList.contains("correct")) {
+            stationAddName.classList.add("correct");
+            turnOnAddStationButton();
+        }
+    }
+}
+
+var stationaddbutton = document.getElementById("stationaddbutton");
+
+function turnOnAddStationButton() {
+    if (stationAddName.classList.contains("correct")) {
+        stationaddbutton.disabled = false;
+    }
+    else {
+        stationaddbutton.disabled = true;
+    }
+}

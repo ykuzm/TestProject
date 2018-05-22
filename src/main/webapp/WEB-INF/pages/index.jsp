@@ -9,6 +9,9 @@
 <body>
 <section class="logsection">
     <div class="logdiv">
+        <h1 class="text">
+            Hello, guest! To look at trains schedule or buy any tickets, you should log in or register
+        </h1>
         <div class="buttonblock">
             <a href="/railway/login"><button class="button">Log in</button></a>
             <a href="/railway/register"><button class="button">Registration</button></a>

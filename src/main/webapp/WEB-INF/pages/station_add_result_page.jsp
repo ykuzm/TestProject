@@ -1,17 +1,19 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Account already exists</title>
+    <title>Correct station add</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
-<section class="logsection">
+<section class="accountsection">
     <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">${exception}</div>
+        <div class="incorrectinputtext">You have successfully added station ${station.name}!</div>
         <div class="buttonblock">
-            <a href="/railway/register"><button class="button">Registration</button></a>
+            <a href="/railway/account/addstation"><button class="button2">Add another station</button></a>
+        </div>
+        <div class="buttonblock">
+            <a href="/railway/account"><button class="button2">Account</button></a>
         </div>
     </div>
 </section>

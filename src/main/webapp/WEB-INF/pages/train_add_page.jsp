@@ -3,21 +3,30 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Buy ticket</title>
+    <title>Add train</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
 <section class="accountsection">
     <div class="ticketbuydiv">
-        <spring:form modelAttribute="train" method="post" action="/railway/account/buyticket/result">
+        <h1 class="text">
+            Train add panel
+        </h1>
+        <spring:form modelAttribute="train" method="post" action="/railway/account/addtrain/result">
             <div class="trainnumberinputline">
                 <p>Train number</p>
-                <spring:input id="trainnumberinput" class="smallinputfield" title="number" path="number"
-                              onkeyup="javascript: checkTrainNumber(); return false;" />
+                <spring:input id="trainaddnumberinput" class="smallinputfield" title="number" path="number"
+                              onkeyup="javascript: checkTrainAddNumber(); return false;" />
             </div>
             <div class="reghint">Input train number (from 1 to 999)</div>
+            <div class="trainnumberinputline">
+                <p>Number of seats</p>
+                <spring:input id="trainaddseatsinput" class="smallinputfield" title="freeSeats" path="freeSeats"
+                              onkeyup="javascript: checkTrainAddSeats(); return false;" />
+            </div>
+            <div class="reghint">Input number of freaSeats (from 1 to 999)</div>
             <div class="buttonblock">
-                <spring:button id="ticketbuybutton" class="button" disabled="true">Buy</spring:button>
+                <spring:button id="addtrainbutton" class="button" disabled="true">Add train</spring:button>
             </div>
         </spring:form>
         <div class="buttonblock">

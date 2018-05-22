@@ -9,10 +9,9 @@
 <body>
 <section class="logsection">
     <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">Sorry, but your input data is incorrect. Follow the instructions!</div>
+        <div class="incorrectinputtext">Sorry! You are not a admin to edit the data.</div>
         <div class="buttonblock">
-            <a href="/railway/login"><button class="button">Log in</button></a>
-            <a href="/railway/register"><button class="button">Registration</button></a>
+            <a href="/railway/account"><button class="button">Account</button></a>
         </div>
     </div>
 </section>
@@ -20,4 +19,3 @@
 <script type="text/javascript" src="/static/js/script_js.js"></script>
 </body>
 </html>
-

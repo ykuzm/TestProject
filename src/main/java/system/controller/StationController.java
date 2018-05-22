@@ -7,15 +7,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import system.dao.PassengerDao;
 import system.model.Passenger;
+import system.model.Station;
+import system.model.Train;
 import system.service.PassengerService;
 import system.service.StationService;
 import system.service.TrainService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.regex.Pattern;
 
 @Controller
-@SessionAttributes(value="station")
 @RequestMapping(value = "/railway", method = RequestMethod.GET)
 public class StationController {
 
@@ -36,79 +38,44 @@ public class StationController {
         return stationService.getAllStations().toString();
     }
 
-//    @RequestMapping(value = "/", method = RequestMethod.POST)
-//    public ModelAndView passengerInit(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("passenger", new Passenger());
-//        modelAndView.setViewName("index");
-//        return modelAndView;
-//    }
+    @RequestMapping(value = "/account/addstation", method = RequestMethod.GET)
+    public ModelAndView addStation(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
+        if (passenger.getLogin() == null) {
+            modelAndView.setViewName("passenger_need_to_login_page");
+            return modelAndView;
+        }
+        if (!passenger.isAdmin()) {
+            modelAndView.setViewName("passenger_is_not_admin_page");
+            return modelAndView;
+        }
+        modelAndView.addObject("station", new Station());
+        modelAndView.setViewName("station_add_page");
+        return modelAndView;
+    }
 
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public ModelAndView login(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("passenger", new Passenger());
-//        modelAndView.setViewName("passenger_login_page");
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/login/result", method = RequestMethod.POST)
-//    public ModelAndView checkLogin(@ModelAttribute("passenger") Passenger passenger){
-//        ModelAndView modelAndView = new ModelAndView();
-//        if(passenger.getLogin() == null) {
-//            modelAndView.setViewName("passenger_need_to_login_page");
-//            return modelAndView;
-//        }
-//        List<Passenger> passengerList = passengerService.getPassengerByLogin(passenger.getLogin());
-//        if (passengerList.size() != 0 && passengerList.get(0).getPassword().equals(passenger.getPassword())) {
-//            modelAndView.addObject("passenger", passengerList.get(0));
-//            modelAndView.setViewName("passenger_correct_login_page");
-//            return modelAndView;
-//        }
-//        modelAndView.setViewName("passenger_incorrect_login_page");
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/account", method = RequestMethod.POST)
-//    public ModelAndView goToAccount(@ModelAttribute("passenger") Passenger passenger){
-//        ModelAndView modelAndView = new ModelAndView();
-//        if(passenger.getLogin() == null) {
-//            modelAndView.setViewName("passenger_need_to_login_page");
-//            return modelAndView;
-//        }
-//        modelAndView.addObject("passenger", passenger);
-//        if (passenger.getLogin().equals("admin")) {
-//            modelAndView.setViewName("admin_account_page");
-//        }
-//        else {
-//            modelAndView.setViewName("passenger_account_page");
-//        }
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/register", method = RequestMethod.GET)
-//    public ModelAndView register(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("passenger", new Passenger());
-//        modelAndView.setViewName("passenger_register_page");
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/register/result", method = RequestMethod.POST)
-//    public ModelAndView checkRegister(@ModelAttribute("passenger") Passenger passenger){
-//        ModelAndView modelAndView = new ModelAndView();
-//        if(passenger.getLogin() == null) {
-//            modelAndView.setViewName("passenger_need_to_login_page");
-//            return modelAndView;
-//        }
-//        List<Passenger> passengerList = passengerService.getPassengerByLogin(passenger.getLogin());
-//        if (passengerList.size() != 0) {
-//            modelAndView.setViewName("passenger_already_exists_page");
-//            return modelAndView;
-//        }
-//        passengerService.addPassenger(passenger);
-//        modelAndView.addObject("passenger", passenger);
-//        modelAndView.setViewName("passenger_correct_register_page");
-//        return modelAndView;
-//    }
+    @RequestMapping(value = "/account/addstation/result", method = RequestMethod.POST)
+    public ModelAndView addTrainResult(@ModelAttribute("station") Station station, HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
+        if (passenger.getLogin() == null) {
+            modelAndView.setViewName("passenger_need_to_login_page");
+            return modelAndView;
+        }
+        if (!passenger.isAdmin()) {
+            modelAndView.setViewName("passenger_is_not_admin_page");
+            return modelAndView;
+        }
+        try {
+            stationService.addStation(station);
+            modelAndView.addObject(station);
+            modelAndView.setViewName("station_add_result_page");
+        } catch (Exception e) {
+            modelAndView.addObject("exception", e.getMessage());
+            modelAndView.setViewName("station_add_error_page");
+        }
+        return modelAndView;
+    }
+
 }

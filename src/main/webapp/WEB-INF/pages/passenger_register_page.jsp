@@ -10,6 +10,9 @@
 <body>
 <section class="logsection">
     <div class="regdiv">
+        <h1 class="text">
+            Registration form
+        </h1>
         <spring:form modelAttribute="passenger" method="post" action="/railway/register/result">
             <div class="reginputline">
                 <p>Login</p>

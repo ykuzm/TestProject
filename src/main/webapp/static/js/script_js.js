@@ -72,3 +72,33 @@ $(window).on('resize', function() {
     var margin = (height - height_2)/"2";
     $('.adminaccountdiv').css('margin-top', margin + "px");
 })
+
+// Vertical displacement for station_choose_page
+$(document).ready(function() {
+    var height = $(window).height();
+    var height_2 = $('.stationnamediv').outerHeight();
+    var margin = (height - height_2)/"2";
+    $('.stationnamediv').css('margin-top', margin + "px");
+})
+
+$(window).on('resize', function() {
+    var height = $(window).height();
+    var height_2 = $('.stationnamediv').outerHeight();
+    var margin = (height - height_2)/"2";
+    $('.stationnamediv').css('margin-top', margin + "px");
+})
+
+// Vertical displacement for ticket_buy_page
+$(document).ready(function() {
+    var height = $(window).height();
+    var height_2 = $('.ticketbuydiv').outerHeight();
+    var margin = (height - height_2)/"2";
+    $('.ticketbuydiv').css('margin-top', margin + "px");
+})
+
+$(window).on('resize', function() {
+    var height = $(window).height();
+    var height_2 = $('.ticketbuydiv').outerHeight();
+    var margin = (height - height_2)/"2";
+    $('.ticketbuydiv').css('margin-top', margin + "px");
+})
