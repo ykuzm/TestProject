@@ -43,7 +43,7 @@ public class TicketController {
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         modelAndView.addObject("train", new Train());
@@ -56,12 +56,12 @@ public class TicketController {
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         try {
             ticketService.addTicket(passenger.getId(), train.getNumber());
-            modelAndView.setViewName("ticket_correct_buy_page");
+            modelAndView.setViewName("ticket_buy_result_page");
         } catch (Exception e) {
             modelAndView.addObject("exception", e.getMessage());
             modelAndView.setViewName("ticket_buy_error_page");

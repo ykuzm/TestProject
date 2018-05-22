@@ -30,7 +30,7 @@
         <property name="url"
                   value="jdbc:mysql://localhost:3306/railway_app?useSSL=false"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="YarKuz90!"/>
     </bean>
 
     <!-- Hibernate 5 SessionFactory Bean definition -->

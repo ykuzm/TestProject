@@ -42,11 +42,11 @@ public class TrainController {
     }
 
     @RequestMapping(value = "/account/purchasedtickets", method = RequestMethod.GET)
-    public ModelAndView getTrainsByPassengerId(HttpServletRequest request){
+    public ModelAndView passengerTrainList(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         List<Train> trainList = trainService.getTrainByPassengerId(passenger.getId());
@@ -56,57 +56,57 @@ public class TrainController {
     }
 
     @RequestMapping(value = "/account/station", method = RequestMethod.GET)
-    public ModelAndView chooseStation(HttpServletRequest request){
+    public ModelAndView stationInfo(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         modelAndView.addObject("station", new Station());
-        modelAndView.setViewName("station_choose_page");
+        modelAndView.setViewName("station_info_page");
         return modelAndView;
     }
 
     @RequestMapping(value = "/account/station/info", method = RequestMethod.POST)
-    public ModelAndView stationInfo(@ModelAttribute("station") Station station1, HttpServletRequest request){
+    public ModelAndView stationInfoResult(@ModelAttribute("station") Station station1, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         try {
             Map<Integer,String> trainMap = trainService.getTrainsByStation(station1);
             modelAndView.addObject("station", station1);
             modelAndView.addObject("trainMap", trainMap);
-            modelAndView.setViewName("station_info_page");
+            modelAndView.setViewName("station_info_result_page");
         } catch (Exception e) {
             modelAndView.addObject("exception", e.getMessage());
-            modelAndView.setViewName("station_name_error_page");
+            modelAndView.setViewName("station_info_error_page");
         }
         return modelAndView;
     }
 
     @RequestMapping(value = "/account/trainsearch", method = RequestMethod.GET)
-    public ModelAndView chooseSchedule(HttpServletRequest request){
+    public ModelAndView scheduleInfo(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         modelAndView.addObject("trainSearch", new TrainSearch());
-        modelAndView.setViewName("train_search_page");
+        modelAndView.setViewName("schedule_info_page");
         return modelAndView;
     }
 
     @RequestMapping(value = "/account/trainsearch/info", method = RequestMethod.POST)
-    public ModelAndView scheduleInfo(@ModelAttribute("trainSearch") TrainSearch trainSearch, HttpServletRequest request){
+    public ModelAndView scheduleInfoResult(@ModelAttribute("trainSearch") TrainSearch trainSearch, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         try {
@@ -116,10 +116,10 @@ public class TrainController {
             modelAndView.addObject("station2", trainSearch.getStation2());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             modelAndView.addObject("date", sdf.format(trainSearch.getDate()));
-            modelAndView.setViewName("schedule_info_page");
+            modelAndView.setViewName("schedule_info_result_page");
         } catch (Exception e) {
             modelAndView.addObject("exception", e.getMessage());
-            modelAndView.setViewName("station_name_error_page");
+            modelAndView.setViewName("station_info_error_page");
         }
         return modelAndView;
     }
@@ -129,11 +129,11 @@ public class TrainController {
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         if (!passenger.isAdmin()) {
-            modelAndView.setViewName("passenger_is_not_admin_page");
+            modelAndView.setViewName("error_not_admin_page");
             return modelAndView;
         }
         modelAndView.addObject("train", new Train());
@@ -146,11 +146,11 @@ public class TrainController {
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         if (!passenger.isAdmin()) {
-            modelAndView.setViewName("passenger_is_not_admin_page");
+            modelAndView.setViewName("error_not_admin_page");
             return modelAndView;
         }
         try {

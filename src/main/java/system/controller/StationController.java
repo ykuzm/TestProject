@@ -43,11 +43,11 @@ public class StationController {
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         if (!passenger.isAdmin()) {
-            modelAndView.setViewName("passenger_is_not_admin_page");
+            modelAndView.setViewName("error_not_admin_page");
             return modelAndView;
         }
         modelAndView.addObject("station", new Station());
@@ -56,15 +56,15 @@ public class StationController {
     }
 
     @RequestMapping(value = "/account/addstation/result", method = RequestMethod.POST)
-    public ModelAndView addTrainResult(@ModelAttribute("station") Station station, HttpServletRequest request){
+    public ModelAndView addStationResult(@ModelAttribute("station") Station station, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         if (!passenger.isAdmin()) {
-            modelAndView.setViewName("passenger_is_not_admin_page");
+            modelAndView.setViewName("error_not_admin_page");
             return modelAndView;
         }
         try {

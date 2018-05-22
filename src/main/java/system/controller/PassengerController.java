@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import system.dao.PassengerDao;
 import system.model.Passenger;
+import system.model.Train;
 import system.service.PassengerService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,17 +56,17 @@ public class PassengerController {
     public ModelAndView loginResult(@ModelAttribute("passenger") Passenger passenger, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         if(passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         try {
             Passenger passenger1 = passengerService.login(passenger);
             modelAndView.addObject("passenger", passenger1);
-            modelAndView.setViewName("passenger_correct_login_page");
+            modelAndView.setViewName("passenger_login_result_page");
             request.getSession().setAttribute("passenger", passenger1);
         } catch (Exception e) {
             modelAndView.addObject("exception", e.getMessage());
-            modelAndView.setViewName("passenger_incorrect_login_page");
+            modelAndView.setViewName("passenger_login_error_page");
         }
         return modelAndView;
     }
@@ -74,15 +75,15 @@ public class PassengerController {
     public ModelAndView goToAccount(@ModelAttribute("passenger") Passenger passenger){
         ModelAndView modelAndView = new ModelAndView();
         if(passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         modelAndView.addObject("passenger", passenger);
         if (passenger.isAdmin()) {
-            modelAndView.setViewName("passenger_admin_account_page");
+            modelAndView.setViewName("account_admin_page");
         }
         else {
-            modelAndView.setViewName("passenger_passenger_account_page");
+            modelAndView.setViewName("account_passenger_page");
         }
         return modelAndView;
     }
@@ -99,19 +100,36 @@ public class PassengerController {
     public ModelAndView registerResult(@ModelAttribute("passenger") Passenger passenger, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         if(passenger.getLogin() == null) {
-            modelAndView.setViewName("passenger_need_to_login_page");
+            modelAndView.setViewName("error_not_logged_page");
             return modelAndView;
         }
         try {
             passengerService.addPassenger(passenger);
             modelAndView.addObject("passenger", passenger);
-            modelAndView.setViewName("passenger_correct_register_page");
+            modelAndView.setViewName("passenger_register_result_page");
             request.getSession().setAttribute("passenger", passenger);
         } catch (Exception e) {
             modelAndView.addObject("exception", e.getMessage());
-            modelAndView.setViewName("passenger_already_exists_page");
+            modelAndView.setViewName("passenger_register_error_page");
             return modelAndView;
         }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/account/trainpassenger", method = RequestMethod.GET)
+    public ModelAndView getPassengerByTrain(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
+        if (passenger.getLogin() == null) {
+            modelAndView.setViewName("error_not_logged_page");
+            return modelAndView;
+        }
+        if (!passenger.isAdmin()) {
+            modelAndView.setViewName("error_not_admin_page");
+            return modelAndView;
+        }
+        modelAndView.addObject("train", new Train());
+        modelAndView.setViewName("train_passenger_page");
         return modelAndView;
     }
 }

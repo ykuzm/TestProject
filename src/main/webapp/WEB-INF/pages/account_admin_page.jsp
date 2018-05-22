@@ -18,7 +18,7 @@
             </h1>
             <div class="buttonblock"><a href="/railway/account/addstation"><button class="button3">Add station</button></a></div>
             <div class="buttonblock"><a href="/railway/account/addtrain"><button class="button3">Add train</button></a></div>
-            <div class="buttonblock"><a href="/railway/account/viewpassengers"><button class="button3">View passengers on train</button></a></div>
+            <div class="buttonblock"><a href="/railway/account/trainpassenger"><button class="button3">View passengers on train</button></a></div>
             <div class="buttonblock"><a href="/railway/account/viewtrains"><button class="button3">View all trains</button></a></div>
         </div>
     </section>
