@@ -269,7 +269,8 @@ function checkStation3Name() {
 }
 
 var dateAddRegex = new RegExp("^(([0-2][1-9]|3[01])-(January|March|May|July|August|October|December)|" +
-    "([0-2][1-9]|30)-(April|June|September|November)|([0-2][1-9])-(February))-[2][0][1][8]$");
+    "([0-2][1-9]|30)-(April|June|September|November)|([0-2][1-9])-(February))-[2][0][1][8][\\s]" +
+    "([0-1][0-9]|2[0-3]):[0-5][0-9]");
 var departureAddDate = document.getElementById("departuredate1");
 
 function checkDepatureDate1() {

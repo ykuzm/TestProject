@@ -97,7 +97,7 @@ public class TrainService {
         Map<Integer, String> trainMap = new HashMap<Integer, String>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         for (Schedule schedule: scheduleList) {
-            trainMap.put(getTrainById(schedule.getTrainId()).getNumber(), sdf.format(schedule.getArrivalTime()));
+            trainMap.put(getTrainById(schedule.getTrainId()).getNumber(), sdf.format(schedule.getDepartureDate()));
         }
         return trainMap;
     }
@@ -122,7 +122,7 @@ public class TrainService {
             int j = 0;
             for (int index = 0; index < trainScheduleList.size(); index++) {
                 if (trainScheduleList.get(index).getStationId() == station1.getId()) {
-                    String a = sdf.format(trainScheduleList.get(index).getArrivalTime());
+                    String a = sdf.format(trainScheduleList.get(index).getDepartureDate());
                     String d = sdf.format(date);
                     if (a.equals(d)) {
                         i = index;
@@ -139,7 +139,7 @@ public class TrainService {
                 }
             }
             if (j > i) {
-                trainMap.put(train.getNumber(), sdf2.format(trainScheduleList.get(i).getArrivalTime()));
+                trainMap.put(train.getNumber(), sdf2.format(trainScheduleList.get(i).getDepartureDate()));
             }
         }
         return trainMap;

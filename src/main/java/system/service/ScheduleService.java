@@ -47,14 +47,16 @@ public class ScheduleService {
         List<Schedule> scheduleList = getScheduleByTrainId(train.getId());
         Map<String, Date> scheduleMap = new LinkedHashMap<String, Date>();
         for (Schedule schedule: scheduleList) {
-            scheduleMap.put(stationService.getStationById(schedule.getStationId()).getName(), schedule.getArrivalTime());
+            scheduleMap.put(stationService.getStationById(schedule.getStationId()).getName(),
+                    schedule.getDepartureDate());
         }
         return scheduleMap;
     }
 
     public List<Schedule> getScheduleByStationId(int stationId){ return scheduleDao.getScheduleByStationId(stationId); }
 
-    public void addSchedule(int trainNumber, String stationName, Date departureDate) throws NotFoundInDatabaseException, CantAddDataException {
+    public void addSchedule(int trainNumber, String stationName, Date departureDate) throws NotFoundInDatabaseException,
+            CantAddDataException {
         Train train = trainService.getTrainByNumber(trainNumber);
         Station station = stationService.getStationByName(stationName);
         List<Schedule> scheduleList = scheduleDao.getScheduleByTrainId(train.getId());
@@ -64,13 +66,13 @@ public class ScheduleService {
                         + trainNumber);
             }
         }
-        if (scheduleList.size() > 0 && scheduleList.get(scheduleList.size()-1).getArrivalTime().after(departureDate)) {
+        if (scheduleList.size() > 0 && scheduleList.get(scheduleList.size()-1).getDepartureDate().after(departureDate)) {
             throw new CantAddDataException("Departure time is too early");
         }
         Schedule schedule = new Schedule();
         schedule.setTrainId(train.getId());
         schedule.setStationId(station.getId());
-        schedule.setArrivalTime(departureDate);
+        schedule.setDepartureDate(departureDate);
         scheduleDao.addSchedule(schedule);
     }
 

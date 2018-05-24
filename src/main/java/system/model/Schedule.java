@@ -18,8 +18,8 @@ public class Schedule {
     @Column(name = "stationId")
     private int stationId;
 
-    @Column(name = "arrivalTime")
-    private Date arrivalTime;
+    @Column(name = "departureDate")
+    private Date departureDate;
 
     public int getId() {
         return id;
@@ -45,12 +45,12 @@ public class Schedule {
         this.stationId = stationId;
     }
 
-    public Date getArrivalTime() {
-        return arrivalTime;
+    public Date getDepartureDate() {
+        return departureDate;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Schedule {
                 "id=" + id +
                 ", trainId=" + trainId +
                 ", stationId=" + stationId +
-                ", arrivalTime=" + arrivalTime +
+                ", departureDate=" + departureDate +
                 '}';
     }
 }

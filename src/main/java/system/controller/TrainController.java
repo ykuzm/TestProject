@@ -96,7 +96,8 @@ public class TrainController {
     }
 
     @RequestMapping(value = "/account/trainsearch/info", method = RequestMethod.POST)
-    public ModelAndView scheduleInfoResult(@ModelAttribute("trainSearch") TrainSearch trainSearch, HttpServletRequest request){
+    public ModelAndView scheduleInfoResult(@ModelAttribute("trainSearch") TrainSearch trainSearch,
+                                           HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
         if (passenger.getLogin() == null) {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Registration</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="/static/css/jquery_ui.css" />
+    <link rel="stylesheet" href="/static/css/anytime_5.2.0.css" />
 </head>
 <body>
 <section class="logsection">
@@ -53,14 +53,13 @@
         </div>
     </div>
 </section>
-    <script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>
-    <script type="text/javascript" src="/static/js/jquery_ui_v1.9.2.js"></script>
-    <script type="text/javascript" src="/static/js/script_js.js"></script>
-    <script type="text/javascript" src="/static/js/input_reg_valid_check.js"></script>
-    <script>
-        $(function() {
-           $( "#regbirthdateinput" ).datepicker({dateFormat:"dd-MM-yy"});
-        });
-    </script>
+<script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/static/js/script_js.js"></script>
+<script type="text/javascript" src="/static/js/anytime_5.2.0.js"></script>
+<script type="text/javascript" src="/static/js/input_reg_valid_check.js"></script>
+<script>
+    AnyTime.picker( "regbirthdateinput",
+        { format: "%d-%M-%Z", firstDOW: 1 } )
+</script>
 </body>
 </html>

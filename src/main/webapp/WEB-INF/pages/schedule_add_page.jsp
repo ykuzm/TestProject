@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Add schedule</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="/static/css/jquery_ui.css" />
+    <link rel="stylesheet" href="/static/css/anytime_5.2.0.css" />
 </head>
 <body>
 <section class="accountsection">
@@ -21,7 +21,7 @@
                 <p>Departure date</p>
                 <spring:input id="departuredate1" class="largeinputfield" title="departuredate" path="date"
                               onchange="javascript: checkDepatureDate1(); return false;" />
-                <div class="reghint">Pick departure date (e.g. 25-May-2018)</div>
+                <div class="reghint">Pick departure date (e.g. 25-May-2018 12:35)</div>
             </div>
             <div class="buttonblock">
                 <spring:button id="scheduleaddbutton" class="button" disabled="true">Add schedule</spring:button>
@@ -33,13 +33,12 @@
     </div>
 </section>
 <script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>
-<script type="text/javascript" src="/static/js/jquery_ui_v1.9.2.js"></script>
 <script type="text/javascript" src="/static/js/script_js.js"></script>
+<script type="text/javascript" src="/static/js/anytime_5.2.0.js"></script>
 <script type="text/javascript" src="/static/js/input_log_valid_check.js"></script>
 <script>
-    $(function() {
-        $( "#departuredate1" ).datepicker({dateFormat:"dd-MM-yyyy HH:mm"});
-    });
+    AnyTime.picker( "departuredate1",
+        { format: "%d-%M-%Z %H:%i", firstDOW: 1 } )
 </script>
 </body>
 </html>
