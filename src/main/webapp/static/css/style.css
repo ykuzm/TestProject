@@ -249,7 +249,38 @@ body {
     border: 2px solid green;
 }
 
-/*Styles for scedule info page*/
+/*Styles for schedule info page*/
 .tablecaption{
     width: 320px;
+}
+
+/*Styles for passenger_login_result_page*/
+.loginsuccessfullpage{
+    font: 18pt Calibri;
+    text-align: center;
+}
+
+/*Styles for schedule_info_page*/
+.scheduleinfodiv{
+    width: 480px;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: lightgrey;
+}
+
+.tablecaption2{
+    margin-bottom: 20px;
+}
+
+.button5{
+    margin-left: 20px;
+    font: 18pt Calibri;
+}
+
+/*Styles for train_list_page*/
+.trainlistdiv{
+    width: 710px;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: lightgrey;
 }

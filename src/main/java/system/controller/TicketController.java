@@ -68,4 +68,22 @@ public class TicketController {
         }
         return modelAndView;
     }
+
+    @RequestMapping(value = "/account/buyticket/result-{trainNumber}", method = RequestMethod.GET)
+    public ModelAndView buyTicketResult(@PathVariable int trainNumber, HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
+        if (passenger.getLogin() == null) {
+            modelAndView.setViewName("error_not_logged_page");
+            return modelAndView;
+        }
+        try {
+            ticketService.addTicket(passenger.getId(), trainNumber);
+            modelAndView.setViewName("ticket_buy_result_page");
+        } catch (Exception e) {
+            modelAndView.addObject("exception", e.getMessage());
+            modelAndView.setViewName("ticket_buy_error_page");
+        }
+        return modelAndView;
+    }
 }

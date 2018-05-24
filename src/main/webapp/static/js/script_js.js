@@ -102,3 +102,33 @@ $(window).on('resize', function() {
     var margin = (height - height_2)/"2";
     $('.ticketbuydiv').css('margin-top', margin + "px");
 })
+
+// Vertical displacement for schedule_info_result_page
+$(document).ready(function() {
+    var height = $(window).height();
+    var height_2 = $('.scheduleinfodiv').outerHeight();
+    var margin = (height - height_2)/"2";
+    $('.scheduleinfodiv').css('margin-top', margin + "px");
+})
+
+$(window).on('resize', function() {
+    var height = $(window).height();
+    var height_2 = $('.scheduleinfodiv').outerHeight();
+    var margin = (height - height_2)/"2";
+    $('.scheduleinfodiv').css('margin-top', margin + "px");
+})
+
+// Vertical displacement for train_list_page
+$(document).ready(function() {
+    var height = $(window).height();
+    var height_2 = $('.trainlistdiv').outerHeight();
+    var margin = (height - height_2)/"2";
+    $('.trainlistdiv').css('margin-top', margin + "px");
+})
+
+$(window).on('resize', function() {
+    var height = $(window).height();
+    var height_2 = $('.trainlistdiv').outerHeight();
+    var margin = (height - height_2)/"2";
+    $('.trainlistdiv').css('margin-top', margin + "px");
+})

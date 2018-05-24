@@ -35,12 +35,6 @@ public class TrainController {
         this.trainService = trainService;
     }
 
-    @RequestMapping(value = "/listtrains", method = RequestMethod.GET)
-    @ResponseBody
-    public String getAllTrains() {
-        return trainService.getAllTrains().toString();
-    }
-
     @RequestMapping(value = "/account/purchasedtickets", method = RequestMethod.GET)
     public ModelAndView passengerTrainList(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
@@ -161,6 +155,24 @@ public class TrainController {
             modelAndView.addObject("exception", e.getMessage());
             modelAndView.setViewName("train_add_error_page");
         }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/account/viewalltrains", method = RequestMethod.GET)
+    public ModelAndView viewAllTrains(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
+        if (passenger.getLogin() == null) {
+            modelAndView.setViewName("error_not_logged_page");
+            return modelAndView;
+        }
+        if (!passenger.isAdmin()) {
+            modelAndView.setViewName("error_not_admin_page");
+            return modelAndView;
+        }
+        List<Train> trainList = trainService.getAllTrains();
+        modelAndView.addObject("trainList", trainList);
+        modelAndView.setViewName("train_list_page");
         return modelAndView;
     }
 

@@ -9,10 +9,8 @@
 <body>
 <section class="logsection">
     <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">Log in is successfull!</div>
-        <div class="buttonblock">
-            <a href="/railway/account"><button class="button">Account</button></a>
-        </div>
+        <div class="loginsuccessfullpage">Log in is successfull!</div>
+        <meta http-equiv="refresh" content="1;http://localhost:8080/railway/account" />
     </div>
 </section>
 <script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>

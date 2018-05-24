@@ -3,42 +3,42 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Scedule of trains</title>
+    <title>Full list of trains</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
 <section class="accountsection">
-    <div class="scheduleinfodiv">
-        <c:if test="${trainMap.size() == 0}">
-            <div class="incorrectinputtext">Sorry! There are no trains going from station ${station1.name} to
-                 ${station2.name} on ${date}.</div>
+    <div class="trainlistdiv">
+        <c:if test="${trainList == null}">
+            <div class="incorrectinputtext">Sorry! No trains in the system.</div>
         </c:if>
-        <c:if test="${trainMap.size() > 0}">
+        <c:if test="${trainList != null}">
         <table class="table">
             <caption class="tablecaption2">
-                Trains going from station ${station1.name} to ${station2.name} on ${date}.
+                All registered trains.
             </caption>
             <tr>
                 <th class="tableheader">Train number</th>
-                <th class="tableheader">Departure time</th>
             </tr>
-            <c:forEach  var="train" items="${trainMap}">
+            <c:forEach  var="train" items="${trainList}">
                 <tr>
                     <td class="tablecell">
-                        № <c:out value="${train.key}" />
-                    </td>
-                    <td class="tablecell">
-                        <c:out value="${train.value}" />
+                        № <c:out value="${train.number}" />
                     </td>
                     <td>
-                        <a href="/railway/account/buyticket/result-${train.key}"><button class="button5">Buy ticket</button></a>
+                        <a href="/railway/account/trainschedule-${train.number}"><button class="button5">View schedule</button></a>
+                    </td>
+                    <td>
+                        <a href="/railway/account/trainpassenger-${train.number}"><button class="button5">View passengers</button></a>
+                    </td>
+                    <td>
+                        <a href="/railway/account/addschedule-${train.number}"><button class="button5">Add schedule</button></a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
         </c:if>
         <div class="buttonblock">
-            <a href="/railway/account/trainsearch"><button class="button">Train search</button></a>
             <a href="/railway/account"><button class="button">Account</button></a>
         </div>
     </div>

@@ -247,3 +247,53 @@ function turnOnAddStationButton() {
         stationaddbutton.disabled = true;
     }
 }
+
+// Checking for schedule_add_page
+// Checking correct station names for train search
+var scheduleStationName = document.getElementById("stationnameinput3");
+var scheduleStationNameRegex = new RegExp("^[^A-Z].*|.+[^a-zA-Z\-].*");
+
+function checkStation3Name() {
+    if (scheduleStationNameRegex.test(scheduleStationName.value) || scheduleStationName.value == "") {
+        if (scheduleStationName.classList.contains("correct")) {
+            scheduleStationName.classList.remove("correct");
+            turnOnAddScheduleButton();
+        }
+    }
+    else {
+        if (!scheduleStationName.classList.contains("correct")) {
+            scheduleStationName.classList.add("correct");
+            turnOnAddScheduleButton();
+        }
+    }
+}
+
+var dateAddRegex = new RegExp("^(([0-2][1-9]|3[01])-(January|March|May|July|August|October|December)|" +
+    "([0-2][1-9]|30)-(April|June|September|November)|([0-2][1-9])-(February))-[2][0][1][8]$");
+var departureAddDate = document.getElementById("departuredate1");
+
+function checkDepatureDate1() {
+    if (!dateAddRegex.test(departureAddDate.value) || departureAddDate.value == "") {
+        if (departureAddDate.classList.contains("correct")) {
+            departureAddDate.classList.remove("correct");
+            turnOnAddScheduleButton();
+        }
+    }
+    else {
+        if (!departureAddDate.classList.contains("correct")) {
+            departureAddDate.classList.add("correct");
+            turnOnAddScheduleButton();
+        }
+    }
+}
+
+var addScheduleButton = document.getElementById("scheduleaddbutton");
+
+function turnOnAddScheduleButton() {
+    if (scheduleStationName.classList.contains("correct") && departureAddDate.classList.contains("correct")) {
+        addScheduleButton.disabled = false;
+    }
+    else {
+        addScheduleButton.disabled = true;
+    }
+}

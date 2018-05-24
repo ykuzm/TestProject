@@ -2,16 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Thank you!</title>
+    <title>Correct schedule add</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
 <section class="accountsection">
     <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">You have successfully purchased your ticket!</div>
-        <div class="buttonblock">
-            <a href="/railway/account/trainsearch"><button class="button2">Search another train</button></a>
-        </div>
+        <div class="incorrectinputtext">You have successfully added schedule to train №${trainNumber}!</div>
         <div class="buttonblock">
             <a href="/railway/account"><button class="button2">Account</button></a>
         </div>

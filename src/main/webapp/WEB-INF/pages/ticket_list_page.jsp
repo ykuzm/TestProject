@@ -14,7 +14,7 @@
         </c:if>
         <c:if test="${trainList != null}">
         <table class="table">
-            <caption class="tablecaption">
+            <caption class="tablecaption2">
                 Train numbers, which you purchsed tickets on.
             </caption>
             <tr>
@@ -25,12 +25,14 @@
                     <td class="tablecell">
                         № <c:out value="${train.number}" />
                     </td>
+                    <td>
+                        <a href="/railway/account/trainschedule-${train.number}"><button class="button5">View schedule</button></a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
         </c:if>
         <div class="buttonblock">
-            <a href="/railway/account/buyticket"><button class="button">Buy another ticket</button></a>
             <a href="/railway/account"><button class="button">Account</button></a>
         </div>
     </div>
