@@ -8,6 +8,8 @@
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <b:import resource="spring_config.xml" />
+
     <http use-expressions="true">
         <intercept-url pattern="/railway/" access="permitAll" />
         <intercept-url pattern="/railway/account" access="hasRole('ROLE_ADMIN')" />
@@ -19,16 +21,19 @@
                      login-processing-url="/railway/login/result"
                      default-target-url="/railway/account"
                      authentication-failure-url="/Access_Denied" />
-        <remember-me key= "myKey" token-validity-seconds= "300"/>
+        <http-basic />
+        <remember-me user-service-ref="customUserDetailsService" key= "myKey" token-validity-seconds= "300"/>
         <csrf disabled="true"/>
     </http>
 
-    <authentication-manager >
+    <authentication-manager>
         <authentication-provider user-service-ref="customUserDetailsService"/>
     </authentication-manager>
 
-    <b:bean id="customUserDetailsService" class="system.security.CustomUserDetailsService"/>
+    <b:bean id="customUserDetailsService" class="system.security.CustomUserDetailsService">
+        <b:property name="passengerService" ref="passengerService" />
+    </b:bean>
 
-    <!--<b:bean id="BCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />-->
+    <b:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 </b:beans>

@@ -15,14 +15,23 @@ import system.exceptions.NotFoundInDatabaseException;
 import system.model.Passenger;
 import system.service.PassengerService;
 
-@Service("customUserDetailsService")
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private PassengerService passengerService;
 
+    public PassengerService getPassengerService() {
+        return passengerService;
+    }
+
+    public void setPassengerService(PassengerService passengerService) {
+        this.passengerService = passengerService;
+    }
+
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException
     {
+        System.out.println(passengerService);
         System.out.println(login);
         Passenger passenger = passengerService.getPassengerByLogin(login);
         System.out.println("User : " + passenger);

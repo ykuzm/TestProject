@@ -45,11 +45,11 @@ public class PassengerController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("passenger", new Passenger());
-//        modelAndView.setViewName("passenger_login_page");
-        return("passenger_login_page");
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("passenger", new Passenger());
+        modelAndView.setViewName("passenger_login_page");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/login/result", method = RequestMethod.POST)
