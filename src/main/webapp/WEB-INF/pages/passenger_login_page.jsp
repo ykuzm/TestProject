@@ -15,13 +15,13 @@
         <spring:form modelAttribute="passenger" method="post" action="/railway/login/result">
             <div class="loginputline">
                 <p>Login</p>
-                <spring:input id="loglogininput" class="inputfield" title="Login" path="login"
+                <spring:input id="loglogininput" class="inputfield" name="login" title="Login" path="login"
                               onkeyup="javascript: checkLogin(); return false;" />
             </div>
             <div class="reghint">Use only letters and numbers, 4 symbols at least</div>
             <div class="loginputline">
                 <p>Password</p>
-                <spring:input id="logpasswordinput" class="inputfield" title="Password" path="password"
+                <spring:input id="logpasswordinput" class="inputfield" name="password" title="Password" path="password"
                               onkeyup="javascript: checkPassword(); return false;" />
             </div>
             <div class="reghint">Use only letters and number, 4 symbols at least</div>

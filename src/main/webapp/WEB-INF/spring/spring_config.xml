@@ -10,14 +10,25 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!-- Включает поддержку @Controller и др. в Spring MVC -->
     <mvc:annotation-driven />
-    <context:component-scan base-package="system" />
-    <mvc:view-controller path="/railway" view-name="index" />
 
+    <!-- Расположение статических файлов -->
     <mvc:resources mapping="/static/**" location="/static/" />
 
+    <!--Задает вид стартовой страницы-->
+    <mvc:view-controller path="/railway" view-name="index" />
+
+    <!--  Включает Spring аннотации вроде @Autowired, @Required-->
+    <context:annotation-config />
+
+    <!-- Сканирует пакет для поиска бинов -->
+    <context:component-scan base-package="system" />
+
+    <!-- Определяет какое представление рендерить на основании вычеслений в @Controller (return ModelAndView) -->
     <bean id="resolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/" />
         <property name="suffix" value=".jsp" />
@@ -100,10 +111,10 @@
     </bean>
 
     <!--<tx:annotation-driven/>-->
-    <tx:annotation-driven transaction-manager="tm"/>
+    <!--<tx:annotation-driven transaction-manager="tm"/>-->
 
-    <bean id="tm" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
-    </bean>
+    <!--<bean id="tm" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
+        <!--<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>-->
+    <!--</bean>-->
 
 </beans>
