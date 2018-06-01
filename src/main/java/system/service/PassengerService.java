@@ -53,15 +53,6 @@ public class PassengerService {
 
     public Passenger getPassengerByLogin(String login){ return passengerDao.getPassengerByLogin(login); }
 
-    public Passenger login(Passenger passenger) throws NotFoundInDatabaseException {
-        Passenger passenger1 = getPassengerByLogin(passenger.getLogin());
-        if (passenger1 == null || !passenger1.getPassword().equals(passenger.getPassword())) {
-            throw new NotFoundInDatabaseException("Sorry! But your pair login-password is incorrect. " +
-                    "Try again to log in or register.");
-        }
-        return passenger1;
-    }
-
     public void addPassenger(Passenger passenger) throws CantRegisterException {
         Passenger passenger1 = passengerDao.getPassengerByLogin(passenger.getLogin());
         if (passenger1 != null) {

@@ -1,6 +1,9 @@
 package system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,18 +33,14 @@ public class PassengerController {
         this.passengerService = passengerService;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    @ResponseBody
-    public String getAllPassengers(){
-        return this.passengerService.getAllPassengers().toString();
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String index(){
+        return "index";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ModelAndView passengerInit(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("passenger", new Passenger());
-        modelAndView.setViewName("index");
-        return modelAndView;
+    @RequestMapping(value = "/logout/result", method = RequestMethod.GET)
+    public String logout(){
+        return "passenger_logout_result_page";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -53,31 +52,19 @@ public class PassengerController {
     }
 
     @RequestMapping(value = "/login/result", method = RequestMethod.POST)
-    public ModelAndView loginResult(@ModelAttribute("passenger") Passenger passenger, HttpServletRequest request){
-        ModelAndView modelAndView = new ModelAndView();
-        if(passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
-        try {
-            Passenger passenger1 = passengerService.login(passenger);
-            modelAndView.addObject("passenger", passenger1);
-            modelAndView.setViewName("passenger_login_result_page");
-            request.getSession().setAttribute("passenger", passenger1);
-        } catch (Exception e) {
-            modelAndView.addObject("exception", e.getMessage());
-            modelAndView.setViewName("passenger_login_error_page");
-        }
-        return modelAndView;
+    public String loginResult(){
+        return "passenger_login_result_page";
+    }
+
+    @RequestMapping(value = "/login/error", method = RequestMethod.POST)
+    public String loginError(){
+        return "passenger_login_error_page";
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.POST)
-    public ModelAndView goToAccount(@ModelAttribute("passenger") Passenger passenger){
+    public ModelAndView goToAccount(@AuthenticationPrincipal UserDetails userDetails){
+        Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
         ModelAndView modelAndView = new ModelAndView();
-        if(passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
         modelAndView.addObject("passenger", passenger);
         if (passenger.isAdmin()) {
             modelAndView.setViewName("account_admin_page");
@@ -97,55 +84,30 @@ public class PassengerController {
     }
 
     @RequestMapping(value = "/register/result", method = RequestMethod.POST)
-    public ModelAndView registerResult(@ModelAttribute("passenger") Passenger passenger, HttpServletRequest request){
+    public ModelAndView registerResult(@ModelAttribute("passenger") Passenger passenger){
         ModelAndView modelAndView = new ModelAndView();
-        if(passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
         try {
             passengerService.addPassenger(passenger);
             modelAndView.addObject("passenger", passenger);
             modelAndView.setViewName("passenger_register_result_page");
-            request.getSession().setAttribute("passenger", passenger);
         } catch (Exception e) {
             modelAndView.addObject("exception", e.getMessage());
             modelAndView.setViewName("passenger_register_error_page");
-            return modelAndView;
         }
         return modelAndView;
     }
 
     @RequestMapping(value = "/account/trainpassenger", method = RequestMethod.GET)
-    public ModelAndView getPassengerByTrain(HttpServletRequest request){
+    public ModelAndView getPassengerByTrain(){
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
-        if (!passenger.isAdmin()) {
-            modelAndView.setViewName("error_not_admin_page");
-            return modelAndView;
-        }
         modelAndView.addObject("train", new Train());
         modelAndView.setViewName("train_passenger_page");
         return modelAndView;
     }
 
     @RequestMapping(value = "/account/trainpassenger/result", method = RequestMethod.POST)
-    public ModelAndView getPassengerByTrainResult(@ModelAttribute("train") Train train,
-                                                  HttpServletRequest request){
+    public ModelAndView getPassengerByTrainResult(@ModelAttribute("train") Train train){
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
-        if (!passenger.isAdmin()) {
-            modelAndView.setViewName("error_not_admin_page");
-            return modelAndView;
-        }
         try {
             List<Passenger> passengerList = passengerService.getPassengerByTrainNumber(train.getNumber());
             modelAndView.addObject("passengerList", passengerList);
@@ -154,24 +116,13 @@ public class PassengerController {
         } catch (Exception e) {
             modelAndView.addObject("exception", e.getMessage());
             modelAndView.setViewName("train_passenger_error_page");
-            return modelAndView;
         }
         return modelAndView;
     }
 
     @RequestMapping(value = "/account/trainpassenger-{trainNumber}", method = RequestMethod.GET)
-    public ModelAndView getPassengerByTrainNumber(@PathVariable("trainNumber") int trainNumber,
-                                                  HttpServletRequest request){
+    public ModelAndView getPassengerByTrainNumber(@PathVariable("trainNumber") int trainNumber){
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
-        if (!passenger.isAdmin()) {
-            modelAndView.setViewName("error_not_admin_page");
-            return modelAndView;
-        }
         try {
             List<Passenger> passengerList = passengerService.getPassengerByTrainNumber(trainNumber);
             modelAndView.addObject("passengerList", passengerList);
@@ -180,7 +131,6 @@ public class PassengerController {
         } catch (Exception e) {
             modelAndView.addObject("exception", e.getMessage());
             modelAndView.setViewName("train_passenger_error_page");
-            return modelAndView;
         }
         return modelAndView;
     }

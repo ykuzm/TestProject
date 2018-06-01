@@ -39,9 +39,6 @@
             </table>
         </c:if>
         <div class="buttonblock">
-            <a href="/railway/account/viewalltrains"><button class="button4">Choose another train</button></a>
-        </div>
-        <div class="buttonblock">
             <a href="/railway/account"><button class="button4">Account</button></a>
         </div>
     </div>

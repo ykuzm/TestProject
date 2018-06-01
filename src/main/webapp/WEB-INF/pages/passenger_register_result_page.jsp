@@ -10,7 +10,7 @@
 <section class="logsection">
     <div class="incorrectlogdiv">
         <div class="loginsuccessfullpage">Registration is successfull!</div>
-        <meta http-equiv="refresh" content="1;http://localhost:8080/railway/account" />
+        <meta http-equiv="refresh" content="1;http://localhost:8080/railway/login" />
     </div>
 </section>
 <script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>

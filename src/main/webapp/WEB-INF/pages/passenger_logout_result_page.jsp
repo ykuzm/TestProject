@@ -3,17 +3,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Incorrect login</title>
+    <title>Successfull log out</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
 <section class="logsection">
     <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">Sorry! You should log in to view internal pages.</div>
-        <div class="buttonblock">
-            <a href="/railway/login"><button class="button">Log in</button></a>
-            <a href="/railway/register"><button class="button">Registration</button></a>
-        </div>
+        <div class="loginsuccessfullpage">Log out is successfull!</div>
+        <meta http-equiv="refresh" content="1;http://localhost:8080/railway" />
     </div>
 </section>
 <script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>

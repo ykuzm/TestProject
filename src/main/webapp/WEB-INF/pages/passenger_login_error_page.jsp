@@ -9,7 +9,8 @@
 <body>
 <section class="logsection">
     <div class="incorrectlogdiv">
-        <div class="incorrectinputtext">${exception}</div>
+        <div class="incorrectinputtext">Sorry! But your pair login-password is incorrect.
+            Try again to log in or register.</div>
         <div class="buttonblock">
             <a href="/railway/login"><button class="button">Log in</button></a>
             <a href="/railway/register"><button class="button">Registration</button></a>

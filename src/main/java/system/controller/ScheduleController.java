@@ -37,20 +37,9 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @RequestMapping(value = "/listschedule", method = RequestMethod.GET)
-    @ResponseBody
-    public String getAllSchdeule() {
-        return scheduleService.getAllSchedule().toString();
-    }
-
     @RequestMapping(value = "/account/trainschedule-{trainNumber}", method = RequestMethod.GET)
-    public ModelAndView viewTrainSchedule(@PathVariable int trainNumber, HttpServletRequest request){
+    public ModelAndView viewTrainSchedule(@PathVariable int trainNumber){
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
         try {
             Map<String, Date> scheduleMap = scheduleService.getScheduleByTrainNumber(trainNumber);
             modelAndView.addObject("scheduleMap", scheduleMap);
@@ -64,17 +53,8 @@ public class ScheduleController {
     }
 
     @RequestMapping(value = "/account/addschedule-{trainNumber}", method = RequestMethod.GET)
-    public ModelAndView addScedule(@PathVariable int trainNumber, HttpServletRequest request){
+    public ModelAndView addScedule(@PathVariable int trainNumber){
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
-        if (!passenger.isAdmin()) {
-            modelAndView.setViewName("error_not_admin_page");
-            return modelAndView;
-        }
         modelAndView.addObject("trainNumber", trainNumber);
         modelAndView.addObject("scheduleAdd", new ScheduleAdd());
         modelAndView.setViewName("schedule_add_page");
@@ -83,18 +63,8 @@ public class ScheduleController {
 
     @RequestMapping(value = "/account/addschedule/result-{trainNumber}", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView addSceduleResult(@PathVariable int trainNumber,
-                                         @ModelAttribute("scheduleAdd") ScheduleAdd scheduleAdd,
-                                         HttpServletRequest request){
+                                         @ModelAttribute("scheduleAdd") ScheduleAdd scheduleAdd){
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
-        if (!passenger.isAdmin()) {
-            modelAndView.setViewName("error_not_admin_page");
-            return modelAndView;
-        }
         try {
             scheduleService.addSchedule(trainNumber, scheduleAdd.getStation().getName(), scheduleAdd.getDate());
             modelAndView.addObject("trainNumber", trainNumber);

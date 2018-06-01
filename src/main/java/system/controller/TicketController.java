@@ -1,6 +1,8 @@
 package system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,9 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+    @Autowired
+    private PassengerService passengerService;
+
     public TicketService getTicketService() {
         return ticketService;
     }
@@ -32,33 +37,27 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @RequestMapping(value = "/listtickets", method = RequestMethod.GET)
-    @ResponseBody
-    public String getAllTickets(){
-        return ticketService.getAllTickets().toString();
+    public PassengerService getPassengerService() {
+        return passengerService;
+    }
+
+    public void setPassengerService(PassengerService passengerService) {
+        this.passengerService = passengerService;
     }
 
     @RequestMapping(value = "/account/buyticket", method = RequestMethod.GET)
-    public ModelAndView buyTicket(HttpServletRequest request){
+    public ModelAndView buyTicket(){
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
         modelAndView.addObject("train", new Train());
         modelAndView.setViewName("ticket_buy_page");
         return modelAndView;
     }
 
     @RequestMapping(value = "/account/buyticket/result", method = RequestMethod.POST)
-    public ModelAndView buyTicketResult(@ModelAttribute("train") Train train, HttpServletRequest request){
+    public ModelAndView buyTicketResult(@AuthenticationPrincipal UserDetails userDetails,
+                                        @ModelAttribute("train") Train train){
+        Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
         try {
             ticketService.addTicket(passenger.getId(), train.getNumber());
             modelAndView.setViewName("ticket_buy_result_page");
@@ -70,13 +69,10 @@ public class TicketController {
     }
 
     @RequestMapping(value = "/account/buyticket/result-{trainNumber}", method = RequestMethod.GET)
-    public ModelAndView buyTicketResult(@PathVariable int trainNumber, HttpServletRequest request){
+    public ModelAndView buyTicketResult(@AuthenticationPrincipal UserDetails userDetails,
+                                        @PathVariable int trainNumber){
+        Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
         ModelAndView modelAndView = new ModelAndView();
-        Passenger passenger = (Passenger) request.getSession().getAttribute("passenger");
-        if (passenger.getLogin() == null) {
-            modelAndView.setViewName("error_not_logged_page");
-            return modelAndView;
-        }
         try {
             ticketService.addTicket(passenger.getId(), trainNumber);
             modelAndView.setViewName("ticket_buy_result_page");

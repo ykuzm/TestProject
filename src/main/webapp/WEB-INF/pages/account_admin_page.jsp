@@ -10,7 +10,7 @@
     <section class="accountsection">
         <div class="logoutdiv">
             <div class="welcometext">You logged in as ${passenger.firstName} ${passenger.secondName}! (a.k.a. admin)</div>
-            <a href="/railway/"><button class="logoutbutton">Log out</button></a>
+            <a href="/railway/logout"><button class="logoutbutton">Log out</button></a>
         </div>
         <div class="adminaccountdiv">
             <h1 class="text">

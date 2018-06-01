@@ -12,7 +12,7 @@
         <h1 class="text">
             Log in form
         </h1>
-        <spring:form modelAttribute="passenger" method="post" action="/railway/login/result">
+        <spring:form modelAttribute="passenger" method="post" action="/railway/login/process">
             <div class="loginputline">
                 <p>Login</p>
                 <spring:input id="loglogininput" class="inputfield" name="login" title="Login" path="login"
@@ -30,7 +30,7 @@
             </div>
         </spring:form>
         <div class="buttonblock">
-            <a href="/railway/"><button class="button">Start page</button></a>
+            <a href="/railway"><button class="button">Start page</button></a>
         </div>
     </div>
 </section>
