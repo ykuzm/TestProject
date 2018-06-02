@@ -10,7 +10,7 @@
     <div class="incorrectlogdiv">
         <div class="incorrectinputtext">You have successfully added schedule to train №${trainNumber}!</div>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button2">Account</button></a>
+            <a href="/railway/admin"><button class="button2">Account</button></a>
         </div>
     </div>
 </section>

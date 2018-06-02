@@ -9,7 +9,7 @@
 <body>
 <section class="accountsection">
     <div class="ticketbuydiv">
-        <spring:form modelAttribute="train" method="post" action="/railway/account/trainpassenger/result">
+        <spring:form modelAttribute="train" method="post" action="/railway/admin/trainpassenger/result">
             <div class="trainnumberinputline">
                 <p>Train number</p>
                 <spring:input id="trainnumberinput" class="smallinputfield" title="number" path="number"
@@ -21,7 +21,7 @@
             </div>
         </spring:form>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button">Account</button></a>
+            <a href="/railway/admin"><button class="button">Account</button></a>
         </div>
     </div>
 </section>

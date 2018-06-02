@@ -48,26 +48,28 @@ public class TrainController {
         this.passengerService = passengerService;
     }
 
-    @RequestMapping(value = "/account/purchasedtickets", method = RequestMethod.GET)
-    public ModelAndView passengerTrainList(@AuthenticationPrincipal UserDetails userDetails){
+    @RequestMapping(value = "/passenger/purchasedtickets", method = RequestMethod.GET)
+    public ModelAndView passengerTrainList(@AuthenticationPrincipal UserDetails userDetails,
+                                           @ModelAttribute String role){
         Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
         ModelAndView modelAndView = new ModelAndView();
         List<Train> trainList = trainService.getTrainByPassengerId(passenger.getId());
-        modelAndView.addObject(trainList);
+        modelAndView.addObject("trainList", trainList);
         modelAndView.setViewName("ticket_list_page");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/station", method = RequestMethod.GET)
-    public ModelAndView stationInfo(){
+    @RequestMapping(value = "/passenger/station", method = RequestMethod.GET)
+    public ModelAndView stationInfo(@ModelAttribute String role){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("station", new Station());
         modelAndView.setViewName("station_info_page");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/station/info", method = RequestMethod.POST)
-    public ModelAndView stationInfoResult(@ModelAttribute("station") Station station){
+    @RequestMapping(value = "/passenger/station/info", method = RequestMethod.POST)
+    public ModelAndView stationInfoResult(@ModelAttribute("station") Station station,
+                                          @ModelAttribute String role){
         ModelAndView modelAndView = new ModelAndView();
         try {
             Map<Integer,String> trainMap = trainService.getTrainsByStation(station);
@@ -81,16 +83,17 @@ public class TrainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/trainsearch", method = RequestMethod.GET)
-    public ModelAndView scheduleInfo(){
+    @RequestMapping(value = "/passenger/trainsearch", method = RequestMethod.GET)
+    public ModelAndView scheduleInfo(@ModelAttribute String role){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("trainSearch", new TrainSearch());
         modelAndView.setViewName("schedule_info_page");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/trainsearch/info", method = RequestMethod.POST)
-    public ModelAndView scheduleInfoResult(@ModelAttribute("trainSearch") TrainSearch trainSearch){
+    @RequestMapping(value = "/passenger/trainsearch/info", method = RequestMethod.POST)
+    public ModelAndView scheduleInfoResult(@ModelAttribute("trainSearch") TrainSearch trainSearch,
+                                           @ModelAttribute String role){
         ModelAndView modelAndView = new ModelAndView();
         try {
             Map<Integer, String> trainMap = trainService.searchTrains(trainSearch);
@@ -107,7 +110,7 @@ public class TrainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/addtrain", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/addtrain", method = RequestMethod.GET)
     public ModelAndView addTrain(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("train", new Train());
@@ -115,7 +118,7 @@ public class TrainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/addtrain/result", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/addtrain/result", method = RequestMethod.POST)
     public ModelAndView addTrainResult(@ModelAttribute("train") Train train){
         ModelAndView modelAndView = new ModelAndView();
         try {
@@ -129,7 +132,7 @@ public class TrainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/viewalltrains", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/viewalltrains", method = RequestMethod.GET)
     public ModelAndView viewAllTrains(){
         List<Train> trainList = trainService.getAllTrains();
         ModelAndView modelAndView = new ModelAndView();

@@ -16,7 +16,7 @@
         <c:if test="${trainMap.size() > 0}">
         <table class="table">
             <caption class="tablecaption2">
-                Trains going from station ${station1.name} to ${station2.name} on ${date}.
+                Trains going from station ${station1.name} to station ${station2.name} on ${date}.
             </caption>
             <tr>
                 <th class="tableheader">Train number</th>
@@ -31,15 +31,22 @@
                         <c:out value="${train.value}" />
                     </td>
                     <td>
-                        <a href="/railway/account/buyticket/result-${train.key}"><button class="button5">Buy ticket</button></a>
+                        <a href="/railway/passenger/buyticket/result-${train.key}"><button class="button5">Buy ticket</button></a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
         </c:if>
         <div class="buttonblock">
-            <a href="/railway/account/trainsearch"><button class="button">Train search</button></a>
-            <a href="/railway/account"><button class="button">Account</button></a>
+            <a href="/railway/passenger/trainsearch"><button class="button2">Train search</button></a>
+        </div>
+        <div class="buttonblock">
+            <c:if test="${role == true}">
+                <a href="/railway/admin"><button class="button2">Account</button></a>
+            </c:if>
+            <c:if test="${role == false}">
+                <a href="/railway/passenger"><button class="button2">Account</button></a>
+            </c:if>
         </div>
     </div>
 </section>

@@ -1,16 +1,17 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Choose station</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="/static/css/jquery_ui.css" />
+    <link rel="stylesheet" href="/static/css/anytime_5.2.0.css" />
 </head>
 <body>
 <section class="accountsection">
     <div class="stationnamediv">
-        <spring:form modelAttribute="trainSearch" method="post" action="/railway/account/trainsearch/info">
+        <spring:form modelAttribute="trainSearch" method="post" action="/railway/passenger/trainsearch/info">
             <div class="trainnumberinputline">
                 <p>Departure station</p>
                 <spring:input id="stationnameinput1" class="largeinputfield" title="name1" path="station1.name"
@@ -34,18 +35,22 @@
             </div>
         </spring:form>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button">Account</button></a>
+            <c:if test="${role == true}">
+                <a href="/railway/admin"><button class="button">Account</button></a>
+            </c:if>
+            <c:if test="${role == false}">
+                <a href="/railway/passenger"><button class="button">Account</button></a>
+            </c:if>
         </div>
     </div>
 </section>
 <script type="text/javascript" src="/static/js/jquery-1.11.2.js"></script>
-<script type="text/javascript" src="/static/js/jquery_ui_v1.9.2.js"></script>
 <script type="text/javascript" src="/static/js/script_js.js"></script>
+<script type="text/javascript" src="/static/js/anytime_5.2.0.js"></script>
 <script type="text/javascript" src="/static/js/input_log_valid_check.js"></script>
 <script>
-    $(function() {
-        $( "#departuredate" ).datepicker({dateFormat:"dd-MM-yy"});
-    });
+    AnyTime.picker( "departuredate",
+        { format: "%d-%M-%Z", firstDOW: 1 } )
 </script>
 </body>
 </html>

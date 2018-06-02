@@ -39,7 +39,12 @@
             </table>
         </c:if>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button4">Account</button></a>
+            <c:if test="${role == true}">
+                <a href="/railway/admin"><button class="button">Account</button></a>
+            </c:if>
+            <c:if test="${role == false}">
+                <a href="/railway/passenger"><button class="button">Account</button></a>
+            </c:if>
         </div>
     </div>
 </section>

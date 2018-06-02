@@ -7,7 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import system.additional.TrainSearch;
 import system.dao.PassengerDao;
 import system.model.Passenger;
 import system.model.Train;
@@ -18,7 +20,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 @Controller
-@SessionAttributes(value="passenger")
+@SessionAttributes(value="role")
 @RequestMapping(value = "/railway", method = RequestMethod.GET)
 public class PassengerController {
 
@@ -39,7 +41,8 @@ public class PassengerController {
     }
 
     @RequestMapping(value = "/logout/result", method = RequestMethod.GET)
-    public String logout(){
+    public String logout(SessionStatus sessionStatus){
+        sessionStatus.setComplete();
         return "passenger_logout_result_page";
     }
 
@@ -52,8 +55,12 @@ public class PassengerController {
     }
 
     @RequestMapping(value = "/login/result", method = RequestMethod.POST)
-    public String loginResult(){
-        return "passenger_login_result_page";
+    public ModelAndView loginResult(@AuthenticationPrincipal UserDetails userDetails){
+        Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("role", passenger.isAdmin());
+        modelAndView.setViewName("passenger_login_result_page");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/login/error", method = RequestMethod.POST)
@@ -61,17 +68,35 @@ public class PassengerController {
         return "passenger_login_error_page";
     }
 
-    @RequestMapping(value = "/account", method = RequestMethod.POST)
-    public ModelAndView goToAccount(@AuthenticationPrincipal UserDetails userDetails){
+    @RequestMapping(value = "/admin", method = RequestMethod.POST)
+    public ModelAndView adminAccount(@AuthenticationPrincipal UserDetails userDetails){
         Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("passenger", passenger);
-        if (passenger.isAdmin()) {
-            modelAndView.setViewName("account_admin_page");
+        modelAndView.setViewName("account_admin_page");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/passenger", method = RequestMethod.POST)
+    public ModelAndView passengerAccount(@AuthenticationPrincipal UserDetails userDetails){
+        Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("passenger", passenger);
+        modelAndView.setViewName("account_passenger_page");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/rolechange", method = RequestMethod.POST)
+    public ModelAndView roleChange(@ModelAttribute("role") String role){
+        if (role.equals("true")) {
+            role = "false";
         }
         else {
-            modelAndView.setViewName("account_passenger_page");
+            role = "true";
         }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("role", role);
+        modelAndView.setViewName("admin_role_change_result");
         return modelAndView;
     }
 
@@ -97,7 +122,7 @@ public class PassengerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/trainpassenger", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/trainpassenger", method = RequestMethod.GET)
     public ModelAndView getPassengerByTrain(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("train", new Train());
@@ -105,7 +130,7 @@ public class PassengerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/trainpassenger/result", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/trainpassenger/result", method = RequestMethod.POST)
     public ModelAndView getPassengerByTrainResult(@ModelAttribute("train") Train train){
         ModelAndView modelAndView = new ModelAndView();
         try {
@@ -120,7 +145,7 @@ public class PassengerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/trainpassenger-{trainNumber}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/trainpassenger-{trainNumber}", method = RequestMethod.GET)
     public ModelAndView getPassengerByTrainNumber(@PathVariable("trainNumber") int trainNumber){
         ModelAndView modelAndView = new ModelAndView();
         try {

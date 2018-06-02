@@ -37,8 +37,9 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @RequestMapping(value = "/account/trainschedule-{trainNumber}", method = RequestMethod.GET)
-    public ModelAndView viewTrainSchedule(@PathVariable int trainNumber){
+    @RequestMapping(value = "/passenger/trainschedule-{trainNumber}", method = RequestMethod.GET)
+    public ModelAndView viewTrainSchedule(@ModelAttribute String role,
+                                          @PathVariable int trainNumber){
         ModelAndView modelAndView = new ModelAndView();
         try {
             Map<String, Date> scheduleMap = scheduleService.getScheduleByTrainNumber(trainNumber);
@@ -52,7 +53,7 @@ public class ScheduleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/addschedule-{trainNumber}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/addschedule-{trainNumber}", method = RequestMethod.GET)
     public ModelAndView addScedule(@PathVariable int trainNumber){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("trainNumber", trainNumber);
@@ -61,7 +62,7 @@ public class ScheduleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/addschedule/result-{trainNumber}", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/admin/addschedule/result-{trainNumber}", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView addSceduleResult(@PathVariable int trainNumber,
                                          @ModelAttribute("scheduleAdd") ScheduleAdd scheduleAdd){
         ModelAndView modelAndView = new ModelAndView();

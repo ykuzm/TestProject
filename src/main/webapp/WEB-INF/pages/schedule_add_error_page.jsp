@@ -10,7 +10,7 @@
     <div class="incorrectlogdiv">
         <div class="incorrectinputtext">Sorry! ${exception}</div>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button">Account</button></a>
+            <a href="/railway/admin"><button class="button">Account</button></a>
         </div>
     </div>
 </section>

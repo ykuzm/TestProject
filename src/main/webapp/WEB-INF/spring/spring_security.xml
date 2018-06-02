@@ -12,20 +12,8 @@
 
     <http use-expressions="true">
         <intercept-url pattern="/railway" access="permitAll" />
-        <intercept-url pattern="/railway/login/*" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
-        <intercept-url pattern="/railway/account" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
-        <intercept-url pattern="/railway/account/trainpassenger**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/railway/account/trainpassenger/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/railway/account/addschedule**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/railway/account/addschedule/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/railway/account/addstation/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/railway/account/addtrain/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/railway/account/viewalltrains**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/railway/account/trainschedule**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
-        <intercept-url pattern="/railway/account/buyticket/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
-        <intercept-url pattern="/railway/account/purchasedtickets**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
-        <intercept-url pattern="/railway/account/station/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
-        <intercept-url pattern="/railway/account/trainsearch/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+        <intercept-url pattern="/railway/passenger/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+        <intercept-url pattern="/railway/admin/**" access="hasRole('ROLE_ADMIN')" />
         <form-login  login-page="/railway/login"
                      username-parameter="login"
                      password-parameter="password"
@@ -46,7 +34,5 @@
     <b:bean id="customUserDetailsService" class="system.security.CustomUserDetailsService">
         <b:property name="passengerService" ref="passengerService" />
     </b:bean>
-
-    <b:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder" />
 
 </b:beans>

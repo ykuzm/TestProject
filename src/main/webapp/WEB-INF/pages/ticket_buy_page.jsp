@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,7 +10,7 @@
 <body>
 <section class="accountsection">
     <div class="ticketbuydiv">
-        <spring:form modelAttribute="train" method="post" action="/railway/account/buyticket/result">
+        <spring:form modelAttribute="train" method="post" action="/railway/passenger/buyticket/result">
             <div class="trainnumberinputline">
                 <p>Train number</p>
                 <spring:input id="trainnumberinput" class="smallinputfield" title="number" path="number"
@@ -21,7 +22,12 @@
             </div>
         </spring:form>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button">Account</button></a>
+            <c:if test="${role == true}">
+                <a href="/railway/admin"><button class="button">Account</button></a>
+            </c:if>
+            <c:if test="${role == false}">
+                <a href="/railway/passenger"><button class="button">Account</button></a>
+            </c:if>
         </div>
     </div>
 </section>

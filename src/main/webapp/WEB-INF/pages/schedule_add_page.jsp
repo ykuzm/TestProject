@@ -10,7 +10,7 @@
 <body>
 <section class="accountsection">
     <div class="stationnamediv">
-        <spring:form modelAttribute="scheduleAdd" method="post" action="/railway/account/addschedule/result-${trainNumber}">
+        <spring:form modelAttribute="scheduleAdd" method="post" action="/railway/admin/addschedule/result-${trainNumber}">
             <div class="trainnumberinputline">
                 <p>Destination station</p>
                 <spring:input id="stationnameinput3" class="largeinputfield" title="name" path="station.name"
@@ -28,7 +28,7 @@
             </div>
         </spring:form>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button">Account</button></a>
+            <a href="/railway/admin"><button class="button">Account</button></a>
         </div>
     </div>
 </section>

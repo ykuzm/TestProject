@@ -45,17 +45,18 @@ public class TicketController {
         this.passengerService = passengerService;
     }
 
-    @RequestMapping(value = "/account/buyticket", method = RequestMethod.GET)
-    public ModelAndView buyTicket(){
+    @RequestMapping(value = "/passenger/buyticket", method = RequestMethod.GET)
+    public ModelAndView buyTicket(@ModelAttribute String role){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("train", new Train());
         modelAndView.setViewName("ticket_buy_page");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/buyticket/result", method = RequestMethod.POST)
+    @RequestMapping(value = "/passenger/buyticket/result", method = RequestMethod.POST)
     public ModelAndView buyTicketResult(@AuthenticationPrincipal UserDetails userDetails,
-                                        @ModelAttribute("train") Train train){
+                                        @ModelAttribute("train") Train train,
+                                        @ModelAttribute String role){
         Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
         ModelAndView modelAndView = new ModelAndView();
         try {
@@ -68,8 +69,9 @@ public class TicketController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/buyticket/result-{trainNumber}", method = RequestMethod.GET)
+    @RequestMapping(value = "/passenger/buyticket/result-{trainNumber}", method = RequestMethod.GET)
     public ModelAndView buyTicketResult(@AuthenticationPrincipal UserDetails userDetails,
+                                        @ModelAttribute String role,
                                         @PathVariable int trainNumber){
         Passenger passenger = passengerService.getPassengerByLogin(userDetails.getUsername());
         ModelAndView modelAndView = new ModelAndView();

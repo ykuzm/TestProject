@@ -26,20 +26,20 @@
                         № <c:out value="${train.number}" />
                     </td>
                     <td>
-                        <a href="/railway/account/trainschedule-${train.number}"><button class="button5">View schedule</button></a>
+                        <a href="/railway/passenger/trainschedule-${train.number}"><button class="button5">View schedule</button></a>
                     </td>
                     <td>
-                        <a href="/railway/account/trainpassenger-${train.number}"><button class="button5">View passengers</button></a>
+                        <a href="/railway/admin/trainpassenger-${train.number}"><button class="button5">View passengers</button></a>
                     </td>
                     <td>
-                        <a href="/railway/account/addschedule-${train.number}"><button class="button5">Add schedule</button></a>
+                        <a href="/railway/admin/addschedule-${train.number}"><button class="button5">Add schedule</button></a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
         </c:if>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button">Account</button></a>
+            <a href="/railway/admin"><button class="button">Account</button></a>
         </div>
     </div>
 </section>

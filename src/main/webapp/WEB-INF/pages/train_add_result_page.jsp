@@ -10,10 +10,10 @@
     <div class="incorrectlogdiv">
         <div class="incorrectinputtext">You have successfully added train number ${train.number}!</div>
         <div class="buttonblock">
-            <a href="/railway/account/addtrain"><button class="button2">Add another train</button></a>
+            <a href="/railway/admin/addtrain"><button class="button2">Add another train</button></a>
         </div>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button2">Account</button></a>
+            <a href="/railway/admin"><button class="button2">Account</button></a>
         </div>
     </div>
 </section>

@@ -12,7 +12,7 @@
         <h1 class="text">
             Train add panel
         </h1>
-        <spring:form modelAttribute="train" method="post" action="/railway/account/addtrain/result">
+        <spring:form modelAttribute="train" method="post" action="/railway/admin/addtrain/result">
             <div class="trainnumberinputline">
                 <p>Train number</p>
                 <spring:input id="trainaddnumberinput" class="smallinputfield" title="number" path="number"
@@ -30,7 +30,7 @@
             </div>
         </spring:form>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button">Account</button></a>
+            <a href="/railway/admin"><button class="button">Account</button></a>
         </div>
     </div>
 </section>

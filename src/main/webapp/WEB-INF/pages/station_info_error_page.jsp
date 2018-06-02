@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,13 +11,18 @@
     <div class="incorrectlogdiv">
         <div class="incorrectinputtext">Sorry! ${exception}</div>
         <div class="buttonblock">
-            <a href="/railway/account/trainsearch"><button class="button4">Train search</button></a>
+            <a href="/railway/passenger/trainsearch"><button class="button2">Train search</button></a>
         </div>
         <div class="buttonblock">
-            <a href="/railway/account/station"><button class="button4">Station info</button></a>
+            <a href="/railway/passenger/station"><button class="button2">Station info</button></a>
         </div>
         <div class="buttonblock">
-            <a href="/railway/account"><button class="button4">Account</button></a>
+            <c:if test="${role == true}">
+                <a href="/railway/admin"><button class="button2">Account</button></a>
+            </c:if>
+            <c:if test="${role == false}">
+                <a href="/railway/passenger"><button class="button2">Account</button></a>
+            </c:if>
         </div>
     </div>
 </section>

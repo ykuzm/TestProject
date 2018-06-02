@@ -32,7 +32,7 @@ public class StationController {
         this.stationService = stationService;
     }
 
-    @RequestMapping(value = "/account/addstation", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/addstation", method = RequestMethod.GET)
     public ModelAndView addStation(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("station", new Station());
@@ -40,7 +40,7 @@ public class StationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/account/addstation/result", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/addstation/result", method = RequestMethod.POST)
     public ModelAndView addStationResult(@ModelAttribute("station") Station station){
         ModelAndView modelAndView = new ModelAndView();
         try {

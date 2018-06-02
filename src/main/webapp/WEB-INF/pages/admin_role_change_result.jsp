@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
 </head>
 <body>
-<section class="logsection">
+<section class="accountsection">
     <div class="incorrectlogdiv">
-        <div class="loginsuccessfullpage">Log in is successfull!</div>
+        <div class="loginsuccessfullpage">Role successfully changed!</div>
         <c:if test="${role == true}">
             <meta http-equiv="refresh" content="1;http://localhost:8080/railway/admin" />
         </c:if>
