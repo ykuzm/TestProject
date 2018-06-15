@@ -12,7 +12,7 @@
 
     <http use-expressions="true">
         <intercept-url pattern="/railway" access="permitAll" />
-        <intercept-url pattern="/railway/passenger/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+        <intercept-url pattern="/railway/user/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
         <intercept-url pattern="/railway/admin/**" access="hasRole('ROLE_ADMIN')" />
         <form-login  login-page="/railway/login"
                      username-parameter="login"
@@ -32,7 +32,7 @@
     </authentication-manager>
 
     <b:bean id="customUserDetailsService" class="system.security.CustomUserDetailsService">
-        <b:property name="passengerService" ref="passengerService" />
+        <b:property name="userService" ref="userService" />
     </b:bean>
 
 </b:beans>

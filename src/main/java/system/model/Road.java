@@ -1,23 +1,16 @@
 package system.model;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ticket_data")
-public class Ticket {
+@Table(name = "road_data")
+public class Road {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
-
-    @Column(name = "userId", nullable = false)
-    private int userId;
-
-    @Column(name = "trainId", nullable = false)
-    private int trainId;
 
     @Column(name = "stationId1", nullable = false)
     private int stationId1;
@@ -25,7 +18,10 @@ public class Ticket {
     @Column(name = "stationId2", nullable = false)
     private int stationId2;
 
-    public Ticket() {
+    @Column(name = "distance", nullable = false)
+    private double distance;
+
+    public Road() {
     }
 
     public int getId() {
@@ -34,22 +30,6 @@ public class Ticket {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getTrainId() {
-        return trainId;
-    }
-
-    public void setTrainId(int trainId) {
-        this.trainId = trainId;
     }
 
     public int getStationId1() {
@@ -68,28 +48,35 @@ public class Ticket {
         this.stationId2 = stationId2;
     }
 
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Ticket ticket = (Ticket) o;
-        return getUserId() == ticket.getUserId() &&
-                getTrainId() == ticket.getTrainId();
+        Road road = (Road) o;
+        return getStationId1() == road.getStationId1() &&
+                getStationId2() == road.getStationId2();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getTrainId());
+        return Objects.hash(getStationId1(), getStationId2());
     }
 
     @Override
     public String toString() {
-        return "Ticket{" +
+        return "Road{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", trainId=" + trainId +
                 ", stationId1=" + stationId1 +
                 ", stationId2=" + stationId2 +
+                ", distance=" + distance +
                 '}';
     }
 }

@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import system.model.Passenger;
 import system.model.Station;
 import system.model.Ticket;
 import system.model.Train;
@@ -30,6 +29,11 @@ public class StationDao {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Method for getting all stations from DB
+     *
+     * @return full list of stations from DB
+     */
     @SuppressWarnings("unchecked")
     public List<Station> getAllStations() {
         Session session;
@@ -43,6 +47,12 @@ public class StationDao {
         return stationList;
     }
 
+    /**
+     * Method for getting station by id
+     *
+     * @param id id
+     * @return Station with selected id, null if there is no Station in DB with this id
+     */
     @SuppressWarnings("unchecked")
     public Station getStationById(int id) {
         Session session;
@@ -61,6 +71,12 @@ public class StationDao {
         return stationList.get(0);
     }
 
+    /**
+     * Method for getting user by name
+     *
+     * @param name name
+     * @return Station with selected name, null if there is no Station in DB with this name
+     */
     @SuppressWarnings("unchecked")
     public Station getStationByName(String name) {
         Session session;
@@ -79,6 +95,11 @@ public class StationDao {
         return stationList.get(0);
     }
 
+    /**
+     * Method for adding Station in DB
+     *
+     * @param station station
+     */
     public void addStation(Station station) {
         Session session;
         try {

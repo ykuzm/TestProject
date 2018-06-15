@@ -1,21 +1,18 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Intro page</title>
+    <title>Choose station</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
     <link rel="stylesheet" href="/static/css/anytime_5.2.0.css" />
 </head>
 <body>
-<section class="logsection">
-    <div class="logoutdiv">
-        <a href="/railway/login"><button class="logoutbutton">Log in</button></a>
-        <a href="/railway/register"><button class="logoutbutton">Register</button></a>
-    </div>
+<section class="accountsection">
     <div class="maindiv">
         <div class="stationnamediv">
-            <spring:form modelAttribute="trainSearch" method="post" action="/railway/trainsearch/info">
+            <spring:form modelAttribute="trainSearch" method="post" action="/railway/user/trainsearch/info">
                 <div class="trainnumberinputline">
                     <p>Departure station</p>
                     <spring:input id="stationname1" class="largeinputfield" title="name1" path="station1.name"
@@ -38,6 +35,14 @@
                     <spring:button id="button" class="button" disabled="true">Search trains</spring:button>
                 </div>
             </spring:form>
+            <div class="buttonblock">
+                <c:if test="${role == 'admin'}">
+                    <a href="/railway/admin"><button class="button">Account</button></a>
+                </c:if>
+                <c:if test="${role == 'user'}">
+                    <a href="/railway/user"><button class="button">Account</button></a>
+                </c:if>
+            </div>
         </div>
     </div>
 </section>
@@ -46,7 +51,7 @@
 <script type="text/javascript" src="/static/js/anytime_5.2.0.js"></script>
 <script type="text/javascript" src="/static/js/train_search_valid_check.js"></script>
 <script>
-    AnyTime.picker( "departuredate",
+    AnyTime.picker("departuredate",
         {
             format: "%d-%M-%Z", firstDOW: 1,
             earliest: new Date(),

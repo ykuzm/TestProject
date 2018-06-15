@@ -64,7 +64,7 @@ body {
 
 /*Style for passengers_register_page*/
 .regdiv{
-    width: 380px;
+    width: 420px;
     padding: 20px;
     margin: 0px auto;
     background-color: lightgrey;
@@ -97,7 +97,7 @@ body {
     float: left;
     margin: 0px;
     padding-right: 5px;
-    width: 150px;
+    width: 190px;
     font: 18pt Calibri;
     margin-top: 2px;
 }
@@ -185,7 +185,7 @@ body {
     float: left;
     margin: 0px;
     padding-right: 5px;
-    width: 185px;
+    width: 210px;
     font: 18pt Calibri;
     margin-top: 2px;
 }
@@ -230,7 +230,7 @@ body {
 
 /*Styles for station name input*/
 .stationnamediv{
-    width: 415px;
+    width: 435px;
     padding: 20px;
     margin: 0px auto;
     background-color: lightgrey;

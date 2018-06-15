@@ -54,11 +54,12 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
-                <value>system.model.Passenger</value>
+                <value>system.model.User</value>
                 <value>system.model.Train</value>
                 <value>system.model.Station</value>
                 <value>system.model.Ticket</value>
                 <value>system.model.Schedule</value>
+                <value>system.model.Road</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -69,13 +70,13 @@
         </property>
     </bean>
 
-    <!--PassengerDao and PassengerService beans-->
-    <bean id="passengerDao" class="system.dao.PassengerDao">
+    <!--UserDao and UserService beans-->
+    <bean id="userDao" class="system.dao.UserDao">
         <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </bean>
 
-    <bean id="passengerService" class="system.service.PassengerService">
-        <property name="passengerDao" ref="passengerDao"/>
+    <bean id="userService" class="system.service.UserService">
+        <property name="userDao" ref="userDao"/>
     </bean>
 
     <!--TrainDao and TrainService beans-->
@@ -112,6 +113,15 @@
 
     <bean id="scheduleService" class="system.service.ScheduleService">
         <property name="scheduleDao" ref="scheduleDao"/>
+    </bean>
+
+    <!--RoadDao and RoadService beans-->
+    <bean id="roadDao" class="system.dao.RoadDao">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="roadService" class="system.service.RoadService">
+        <property name="roadDao" ref="roadDao"/>
     </bean>
 
     <!--<tx:annotation-driven/>-->

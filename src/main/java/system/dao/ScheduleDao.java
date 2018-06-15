@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import system.model.Passenger;
 import system.model.Schedule;
 import system.model.Train;
 
@@ -29,6 +28,11 @@ public class ScheduleDao {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Method for getting all schedule from DB
+     *
+     * @return full list of schedule from DB
+     */
     @SuppressWarnings("unchecked")
     public List<Schedule> getAllSchedule() {
         Session session;
@@ -42,6 +46,12 @@ public class ScheduleDao {
         return sceduleList;
     }
 
+    /**
+     * Method for getting schedule by train id
+     *
+     * @param trainId train id
+     * @return List of schedule for train with selected id
+     */
     @SuppressWarnings("unchecked")
     public List<Schedule> getScheduleByTrainId(int trainId) {
         Session session;
@@ -57,6 +67,12 @@ public class ScheduleDao {
         return scheduleList;
     }
 
+    /**
+     * Method for getting schedule by station id
+     *
+     * @param stationId station id
+     * @return List of schedule for station with selected id
+     */
     @SuppressWarnings("unchecked")
     public List<Schedule> getScheduleByStationId(int stationId) {
         Session session;
@@ -72,6 +88,38 @@ public class ScheduleDao {
         return scheduleList;
     }
 
+    /**
+     * Method for getting schedule by train id and station id
+     *
+     * @param trainId  train id
+     * @param stationId station id
+     * @return schedule for selected train id and station id
+     */
+    @SuppressWarnings("unchecked")
+    public Schedule getScheduleByTrainIdAndStationId(int trainId, int stationId) {
+        Session session;
+        try {
+            session = this.sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        Query query = session.createQuery("from Schedule s where s.trainId=:trainId and" +
+                " s.stationId=:stationId");
+        query.setParameter("trainId", trainId);
+        query.setParameter("stationId", stationId);
+        List<Schedule> scheduleList = ((org.hibernate.query.Query) query).list();
+        session.close();
+        if (scheduleList.size() == 0) {
+            return null;
+        }
+        return scheduleList.get(0);
+    }
+
+    /**
+     * Method for adding Schedule in DB
+     *
+     * @param schedule schedule
+     */
     public void addSchedule(Schedule schedule) {
         Session session;
         try {

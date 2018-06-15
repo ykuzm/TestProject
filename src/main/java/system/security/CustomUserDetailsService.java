@@ -12,38 +12,38 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import system.exceptions.NotFoundInDatabaseException;
-import system.model.Passenger;
-import system.service.PassengerService;
+import system.model.User;
+import system.service.UserService;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private PassengerService passengerService;
+    private UserService userService;
 
-    public PassengerService getPassengerService() {
-        return passengerService;
+    public UserService getUserService() {
+        return userService;
     }
 
-    public void setPassengerService(PassengerService passengerService) {
-        this.passengerService = passengerService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException
     {
-        Passenger passenger = passengerService.getPassengerByLogin(login);
-        if(passenger == null){
+        User user = userService.getUserByLogin(login);
+        if(user == null){
             throw new UsernameNotFoundException("Username not found");
         }
-        return new org.springframework.security.core.userdetails.User(passenger.getLogin(), "{noop}" +
-                passenger.getPassword(), true, true, true,
-                true, getGrantedAuthorities(passenger));
+        return new org.springframework.security.core.userdetails.User(user.getLogin(), "{noop}" +
+                user.getPassword(), true, true, true,
+                true, getGrantedAuthorities(user));
     }
 
 
-    private List<GrantedAuthority> getGrantedAuthorities(Passenger passenger){
+    private List<GrantedAuthority> getGrantedAuthorities(User user){
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + (passenger.isAdmin() ? "ADMIN" : "USER")));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + (user.isAdmin() ? "ADMIN" : "USER")));
         return authorities;
     }
 
